@@ -4,6 +4,8 @@ import http from 'http';
 import bodyParser from 'body-parser';
 import swaggerUiExpress from 'swagger-ui-express';
 import swaggerJsdoc from 'swagger-jsdoc';
+import mongoose from 'mongoose';
+import chalk from 'chalk';
 
 class Server {
   public app: express.Application;
@@ -38,6 +40,15 @@ class Server {
       apis: [ `${__dirname}/routes/*.js` ],
     };
 
+    const CONN = 'mongodb://127.0.0.1:27017/Notes_app';
+
+    mongoose.connect(CONN).then(() => {
+      console.log(chalk.bgGreenBright('Connection to database was successful'));
+    }).catch(err => {
+      console.log(chalk.red(`MongoDB Error: ${err}`));
+    });
+
+
     const openapiSpecifications = swaggerJsdoc(options);
 
     this.app.use(
@@ -60,7 +71,7 @@ class Server {
     /**
      * Listen on provided port, on all network interfaces.
      */
-    server.listen(port, () => console.log(`API running on localhost:${port}`));
+    server.listen(port, () => console.log(chalk.bgGreenBright(`App started and listening on localhost: ${port}`)));
   }
 }
 
