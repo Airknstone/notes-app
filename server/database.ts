@@ -6,6 +6,7 @@ import swaggerUiExpress from 'swagger-ui-express';
 import swaggerJsdoc from 'swagger-jsdoc';
 import mongoose from 'mongoose';
 import chalk from 'chalk';
+const NotesApi = require('./routes/notes_api');
 
 class Server {
   public app: express.Application;
@@ -26,7 +27,8 @@ class Server {
     this.app.use(bodyParser.urlencoded({ extended: false }));
 
     // Point static path to dist
-    this.app.use(express.static(path.join(__dirname, 'public')));
+    this.app.use(express.static(path.join(__dirname, '../dist/notes-app')));
+    this.app.use('/', express.static(path.join(__dirname, '../dist/notes-app')));
 
 
     const options = {
@@ -37,7 +39,7 @@ class Server {
           version: '1.0.0',
         },
       },
-      apis: [ `${__dirname}/routes/*.js` ],
+      apis: [ `${__dirname}/routes/*.ts` ],
     };
 
     const CONN = 'mongodb://127.0.0.1:27017/Notes_app';
@@ -68,6 +70,7 @@ class Server {
      */
     const server = http.createServer(this.app);
 
+    this.app.use('/api/notes', NotesApi);
     /**
      * Listen on provided port, on all network interfaces.
      */
