@@ -1,5 +1,5 @@
 
-import { Schema, model, Types, InferSchemaType } from 'mongoose';
+import { Schema, model } from 'mongoose';
 
 
 /* Approach 1 */
@@ -8,6 +8,7 @@ export interface INote {
   notesTitle: string;
   notesBody: string;
 }
+
 
 const NoteSchema = new Schema<INote>(
   {

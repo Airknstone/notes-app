@@ -1,6 +1,5 @@
 
 import express from 'express';
-import { HydratedDocument } from 'mongoose';
 const router = express.Router();
 import Notes, { INote } from '../models/notes-model';
 
@@ -40,21 +39,6 @@ router.get('/', async (req, res) => {
 /* Add a note api */
 router.post('/', async (req, res) => {
   try {
-    /*     const note = {
-          category: req.body.category,
-          notes: [
-            {
-              title: req.body.title,
-              body: req.body.body,
-              links: [
-                {
-                  linkHref: req.body.linkHref,
-                  linkTitle: req.body.linkTitle,
-                },
-              ],
-            },
-          ],
-        }; */
 
     const note: INote = {
       category: req.body.category,
@@ -80,17 +64,64 @@ router.post('/', async (req, res) => {
     console.log(error);
   }
 });
-module.exports = router;
-/* {
-  "category": "Test Category",
-  "notes": [
-      {
-          "title": "Test Title",
-          "body": " Testing the body of a note post",
-          "links": [{
-              "linkHref": "https://mongoosejs.com/docs/typescript/schemas.html",
-              "linkTitle": "Mongoose with Typescript"
-          }]
+
+/* Update Notes */
+router.put('/:noteId', async (req: express.Request, res: express.Response) => {
+  try {
+    Notes.findOne({ _id: req.params[ 'noteId' ] }, function (err: any, note: any) {
+      if (err) {
+        console.log(err);
+        res.status(500).send({ message: err.message });
       }
-  ]
-} */
+      else {
+        console.log(note);
+        note.set({
+          category: req.body.category,
+          notesTitle: req.body.notesTitle,
+          notesBody: req.body.notesBody
+        });
+
+        note.save(function (err: any, note: INote) {
+          if (err) {
+            console.log(err);
+            res.status(500).send({ message: err.message });
+          }
+          else {
+            res.json({
+              httpCode: 200,
+              message: 'Successful Update of a Note',
+              data: note,
+            });
+          }
+        });
+      }
+    });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+
+/* Delete a note api */
+router.delete('/:noteId', async (req: express.Request, res: express.Response) => {
+  try {
+    Notes.findByIdAndDelete({ _id: req.params[ 'noteId' ] }, function (err: any, note: any) {
+      if (err) {
+        console.log(err);
+        res.status(500).send({ message: err.message });
+      }
+      else {
+        console.log(note);
+        res.json({
+          httpCode: 200,
+          message: 'Successful Delete of a Note',
+          data: note,
+        });
+      }
+    });
+
+  } catch (error) {
+    console.log(error);
+  }
+});
+module.exports = router;

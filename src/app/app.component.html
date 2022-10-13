@@ -1,1 +1,17 @@
-<p>Start up working</p>
+<ng-container>
+  <mat-toolbar class="example-header">Header <p><button mat-button (click)="sidenav.toggle()">Toggle</button></p>
+  </mat-toolbar>
+
+  <mat-sidenav-container class="example-container">
+    <mat-sidenav #sidenav mode="side" opened class="example-sidenav">
+
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+
+      <router-outlet></router-outlet>
+
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+
+</ng-container>
