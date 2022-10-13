@@ -9,7 +9,7 @@ export interface INote {
   notesBody: string;
 }
 
-const NoteSchema = new Schema(
+const NoteSchema = new Schema<INote>(
   {
     category: { type: String, required: true },
     notesTitle: { type: String, required: true },
@@ -19,8 +19,8 @@ const NoteSchema = new Schema(
 );
 
 /* Approach 2 */
-export type Note = InferSchemaType<typeof NoteSchema>;
+/* export type Note = InferSchemaType<typeof NoteSchema>; */
 
 
-const Notes = model<Note>('Note', NoteSchema);
+const Notes = model<INote>('Note', NoteSchema);
 export default Notes;

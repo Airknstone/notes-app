@@ -2,8 +2,8 @@
 import express from 'express';
 import { HydratedDocument } from 'mongoose';
 const router = express.Router();
-import Notes from '../models/notes-model';
-import INote from '../models/notes-model';
+import Notes, { INote } from '../models/notes-model';
+
 /**
  * findAll
  * @openapi
@@ -56,7 +56,7 @@ router.post('/', async (req, res) => {
           ],
         }; */
 
-    const note = {
+    const note: INote = {
       category: req.body.category,
       notesTitle: req.body.notesTitle,
       notesBody: req.body.notesBody
