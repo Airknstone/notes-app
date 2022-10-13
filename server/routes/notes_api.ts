@@ -1,7 +1,9 @@
-const express = require('express');
-const router = express.Router();
-const Notes = require('../models/notes-model');
 
+import express from 'express';
+import { HydratedDocument } from 'mongoose';
+const router = express.Router();
+import Notes from '../models/notes-model';
+import INote from '../models/notes-model';
 /**
  * findAll
  * @openapi
@@ -21,7 +23,7 @@ const Notes = require('../models/notes-model');
  */
 router.get('/', async (req, res) => {
   try {
-    Notes.find({}, (err, notes) => {
+    Notes.find({}, (err: Error, notes: any) => {
       if (err) {
         console.log(err);
         res.status(500).send(err.message);
@@ -38,23 +40,30 @@ router.get('/', async (req, res) => {
 /* Add a note api */
 router.post('/', async (req, res) => {
   try {
-    const note = {
-      category: req.body.category,
-      notes: [
-        {
-          title: req.body.title,
-          body: req.body.body,
-          links: [
+    /*     const note = {
+          category: req.body.category,
+          notes: [
             {
-              linkHref: req.body.linkHref,
-              linkTitle: req.body.linkTitle,
+              title: req.body.title,
+              body: req.body.body,
+              links: [
+                {
+                  linkHref: req.body.linkHref,
+                  linkTitle: req.body.linkTitle,
+                },
+              ],
             },
           ],
-        },
-      ],
+        }; */
+
+    const note = {
+      category: req.body.category,
+      notesTitle: req.body.notesTitle,
+      notesBody: req.body.notesBody
+
     };
     console.log(note);
-    Notes.create(note, function (err, note) {
+    Notes.create(note, function (err: any, note: any) {
       if (err) {
         console.log(err);
         res.status(500).send({ message: err.message });
@@ -71,7 +80,6 @@ router.post('/', async (req, res) => {
     console.log(error);
   }
 });
-
 module.exports = router;
 /* {
   "category": "Test Category",

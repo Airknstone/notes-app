@@ -1,20 +1,23 @@
-const express = require('express');
-const path = require('path');
-const http = require('http');
-const bodyParser = require('body-parser');
+import mongoose from 'mongoose';
+import express from 'express';
+import path from 'path';
+import http from 'http';
+
+import bodyParser from 'body-parser';
 const swaggerUiExpress = require('swagger-ui-express');
 const swaggerJsdoc = require('swagger-jsdoc');
-const mongoose = require('mongoose');
+
 const chalk = require('chalk');
 const morgan = require('morgan');
 const NotesApi = require('./routes/notes_api');
 
 class Server {
-  static bootstrap() {
+  public app: express.Application;
+  static bootstrap(): Server {
     return new Server();
   }
 
-  constructor() {
+  constructor () {
     this.app = express();
     // configure application
     this.config();
@@ -42,10 +45,10 @@ class Server {
           version: '1.0.0',
         },
       },
-      apis: [`${__dirname}/routes/*.ts`],
+      apis: [ `${__dirname}/routes/*.ts` ],
     };
 
-    const CONN = 'mongodb://127.0.0.1:27017/Notes_app';
+    const CONN: string = 'mongodb://127.0.0.1:27017/Notes_app';
 
     mongoose
       .connect(CONN)
@@ -69,7 +72,7 @@ class Server {
     /**
      * Get port from environment and store in Express.
      */
-    const port = process.env['PORT'] || '3000';
+    const port = process.env[ 'PORT' ] || '3000';
     this.app.set('port', port);
 
     /**

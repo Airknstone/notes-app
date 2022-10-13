@@ -1,15 +1,17 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+/* import { Schema } from 'mongoose';
 
-const linksSchema = new Schema({
+
+
+const linksSchema: Schema = new Schema({
   linkTitle: { type: String, required: true },
   linkHref: { type: String, required: true },
 });
 
-const NotesSchema = new Schema({
+const NotesSchema: Schema = new Schema({
   title: { type: String, required: true },
   body: { type: String, required: true },
-  links: [linksSchema],
+  links: [ linksSchema ],
 });
 
 module.exports = NotesSchema;
+ */

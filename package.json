@@ -6,7 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "server": "nodemon ./server/app.js",
+    "server": "nodemon ./server/app.ts",
     "test": "ng test"
   },
   "private": true,
@@ -27,6 +27,7 @@
     "rxjs": "~7.5.0",
     "swagger-jsdoc": "^6.2.5",
     "swagger-ui-express": "^4.5.0",
+    "ts-node": "^10.9.1",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
   },
