@@ -1,7 +1,9 @@
+import { ILinks } from './../models/notes-model';
 
 import express from 'express';
 const router = express.Router();
 import Notes, { INote } from '../models/notes-model';
+import { Types } from 'mongoose';
 
 /**
  * findAll
@@ -39,12 +41,15 @@ router.get('/', async (req, res) => {
 /* Add a note api */
 router.post('/', async (req, res) => {
   try {
-
     const note: INote = {
       category: req.body.category,
-      notesTitle: req.body.notesTitle,
-      notesBody: req.body.notesBody
-
+      note: [
+        {
+          noteTitle: req.body.note.noteTitle,
+          noteBody: req.body.note.noteBody,
+          links: [ { linkTitle: req.body.note.links.linkTitle, linkHref: req.body.note.links.linkHref } ],
+        }
+      ]
     };
     console.log(note);
     Notes.create(note, function (err: any, note: any) {
@@ -75,11 +80,17 @@ router.put('/:noteId', async (req: express.Request, res: express.Response) => {
       }
       else {
         console.log(note);
-        note.set({
+        const updateNote: INote = {
           category: req.body.category,
-          notesTitle: req.body.notesTitle,
-          notesBody: req.body.notesBody
-        });
+          note: [
+            {
+              noteTitle: req.body.note.noteTitle,
+              noteBody: req.body.note.noteBody,
+              links: [ { linkTitle: req.body.note.links.linkTitle, linkHref: req.body.note.links.linkHref } ],
+            }
+          ]
+        };
+        note.set(updateNote);
 
         note.save(function (err: any, note: INote) {
           if (err) {
