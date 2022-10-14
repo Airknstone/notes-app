@@ -43,6 +43,7 @@ router.post('/', async (req, res) => {
   try {
     const note: INote = {
       category: req.body.category,
+      description: req.body.description,
       note: [
         {
           noteTitle: req.body.note.noteTitle,
@@ -82,6 +83,7 @@ router.put('/:noteId', async (req: express.Request, res: express.Response) => {
         console.log(note);
         const updateNote: INote = {
           category: req.body.category,
+          description: req.body.description,
           note: [
             {
               noteTitle: req.body.note.noteTitle,

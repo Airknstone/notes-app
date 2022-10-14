@@ -15,6 +15,7 @@ export interface INoteItems {
 /* Document Definition */
 export interface INote {
   category: string,
+  description: string,
   note: INoteItems[];
 }
 
@@ -22,6 +23,7 @@ type NoteModel = Model<INote>;
 const NoteSchema = new Schema<INote, NoteModel>(
   {
     category: { type: String, required: true },
+    description: { type: String, required: true },
     note: [ new Schema<INoteItems>({
       noteTitle: String,
       noteBody: String,
