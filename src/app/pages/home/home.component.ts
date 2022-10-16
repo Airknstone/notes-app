@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
     this.notes = [];
     this.notesService.findAllNotes().subscribe({
       next: (res) => {
-        console.log(res);
+
         this.notes = res.data;
         console.log(this.notes);
       },
@@ -25,6 +25,20 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  deleteNote(noteId: string): void {
+    console.log(noteId);
+
+    this.notesService.deleteNoteCategory(noteId).subscribe({
+      next: (res) => {
+        console.log(`deleted ${noteId}`);
+        this.notes = this.notes.filter((note) => note._id !== noteId);
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
   }
 
 }

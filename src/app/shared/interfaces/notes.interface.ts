@@ -12,6 +12,7 @@ export interface INoteItems {
 
 /* Document Definition */
 export interface Notes {
+  _id: string,
   category: string,
   description: string,
   note: INoteItems[];

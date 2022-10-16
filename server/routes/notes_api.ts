@@ -41,6 +41,10 @@ router.get('/', async (req, res) => {
 /* Add a note api */
 router.post('/', async (req, res) => {
   try {
+    const defaultLink = {
+      linkTitle: "Enter a Title",
+      linkHref: "Enter a URL"
+    };
     const note: INote = {
       category: req.body.category,
       description: req.body.description,
@@ -48,7 +52,10 @@ router.post('/', async (req, res) => {
         {
           noteTitle: req.body.note.noteTitle,
           noteBody: req.body.note.noteBody,
-          links: [ { linkTitle: req.body.note.links.linkTitle, linkHref: req.body.note.links.linkHref } ],
+          links: [ {
+            linkTitle: req.body.note.links.linkTitle ? req.body.note.links.linkTitle : defaultLink.linkTitle,
+            linkHref: req.body.note.links.linkHref ? req.body.note.links.linkHref : defaultLink.linkHref
+          } ],
         }
       ]
     };

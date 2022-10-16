@@ -11,4 +11,7 @@ export class NotesService {
   findAllNotes(): Observable<any> {
     return this.http.get('/api/notes');
   }
+  deleteNoteCategory(noteId: string): Observable<any> {
+    return this.http.delete<any>(`/api/notes/${noteId}`);
+  }
 }

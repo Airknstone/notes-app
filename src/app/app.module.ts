@@ -11,8 +11,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './pages/home/home.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 /* Material Icons Imports */
-import { MatSliderModule } from '@angular/material/slider';
 
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -22,19 +22,21 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { AddCategoryComponent } from './pages/add-category/add-category.component';
+import { ViewNotesComponent } from './pages/view-notes/view-notes.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    AddCategoryComponent
+    AddCategoryComponent,
+    ViewNotesComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatSliderModule,
+    MatDialogModule,
     ReactiveFormsModule,
     MatToolbarModule,
     MatFormFieldModule,
