@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit {
 
   deleteNote(noteId: string): void {
     console.log(noteId);
-
+    /* Need to add Confirmation Dialogue  */
     this.notesService.deleteNoteCategory(noteId).subscribe({
       next: (res) => {
         console.log(`deleted ${noteId}`);

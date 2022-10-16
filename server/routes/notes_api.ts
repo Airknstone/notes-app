@@ -1,9 +1,10 @@
-import { ILinks } from './../models/notes-model';
+import { INoteItems } from './../../src/app/shared/interfaces/notes.interface';
+
 
 import express from 'express';
 const router = express.Router();
-import Notes, { INote } from '../models/notes-model';
-import { Types } from 'mongoose';
+import Notes, { INote, ILinks } from '../models/notes-model';
+
 
 /**
  * findAll
@@ -41,17 +42,22 @@ router.get('/', async (req, res) => {
 /* Add a note api */
 router.post('/', async (req, res) => {
   try {
-    const defaultLink = {
+    const defaultLink: ILinks = {
       linkTitle: "Enter a Title",
       linkHref: "Enter a URL"
+    };
+    const defaultInotesItems: INoteItems = {
+      noteTitle: 'Enter Note Title',
+      noteBody: "Enter Notes...",
+      links: [ defaultLink ]
     };
     const note: INote = {
       category: req.body.category,
       description: req.body.description,
       note: [
         {
-          noteTitle: req.body.note.noteTitle,
-          noteBody: req.body.note.noteBody,
+          noteTitle: req.body.note.noteTitle ? req.body.note.noteTitle : defaultInotesItems.noteTitle,
+          noteBody: req.body.note.noteBody ? req.body.note.noteBody : defaultInotesItems.noteBody,
           links: [ {
             linkTitle: req.body.note.links.linkTitle ? req.body.note.links.linkTitle : defaultLink.linkTitle,
             linkHref: req.body.note.links.linkHref ? req.body.note.links.linkHref : defaultLink.linkHref

@@ -1,0 +1,13 @@
+.example-card {
+  width: 23rem;
+}
+.delete-button {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+
+  #delete {
+    width: 24px !important;
+    color: red;
+  }
+}

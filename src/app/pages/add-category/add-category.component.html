@@ -1,2 +1,29 @@
-<p>add-category works!</p>
-<button routerLink="/">Return Home</button>
+<h1>Add a New Category</h1>
+<br>
+<mat-divider></mat-divider>
+
+<form class="form-layout" [formGroup]="addCategory" (ngSubmit)="onSubmit()">
+  <div fxLayout="column">
+    <mat-form-field appearance="outline">
+      <mat-label>Category Title: </mat-label>
+      <input matInput [formControl]="addCategory.controls['category']" placeholder="Category Title">
+      <mat-error class="error" *ngIf="addCategory.controls['category'].invalid">
+        Please Enter a Title- Cannot be Empty.
+      </mat-error>
+      <!--     <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+    <mat-hint>Hint</mat-hint> -->
+
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Category Description: </mat-label>
+      <input matInput [formControl]="addCategory.controls['description']" placeholder="Category Description">
+      <mat-error class="error" *ngIf="addCategory.controls['description'].invalid">
+        Please Enter a Description- Cannot be Empty.
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div class="actions" fxLayout="row" fxLayoutAlign="space-between center">
+    <button mat-raised-button type="button" routerLink="/">Cancel</button>
+    <button mat-raised-button type="submit" color="primary" [disabled]="!addCategory.valid">Add Category</button>
+  </div>
+</form>
