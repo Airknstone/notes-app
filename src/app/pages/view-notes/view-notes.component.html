@@ -1,2 +1,21 @@
-<p>view-notes works!</p>
-<button routerLink="/">Return Home</button>
+<div *ngIf="notes" fxLayout="column">
+
+
+  <h3>{{notes.category}}</h3>
+  <p>{{notes.description}}</p>
+
+  <div *ngFor="let note of notes.note">
+    <mat-card fxFlex="20%">
+      <p>{{note.noteTitle}}</p>
+      <p>{{note.noteBody}}</p>
+
+      <hr>
+      <div *ngFor="let links of note.links">
+        <a href="{{links.linkHref}}">{{links.linkTitle}}</a>
+
+      </div>
+    </mat-card>
+  </div>
+</div>
+
+<button mat-button routerLink="/">Return Home</button>

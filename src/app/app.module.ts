@@ -24,6 +24,9 @@ import { MatCardModule } from '@angular/material/card';
 import { AddCategoryComponent } from './pages/add-category/add-category.component';
 import { ViewNotesComponent } from './pages/view-notes/view-notes.component';
 import { MatIconModule } from '@angular/material/icon';
+import { FormsModule } from '@angular/forms';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatListModule } from '@angular/material/list';
 
 
 @NgModule({
@@ -50,7 +53,10 @@ import { MatIconModule } from '@angular/material/icon';
     FlexLayoutModule,
     MatButtonModule,
     MatIconModule,
-    MatDividerModule
+    MatDividerModule,
+    FormsModule,
+    MatMenuModule,
+    MatListModule
   ],
   providers: [],
   bootstrap: [ AppComponent ]

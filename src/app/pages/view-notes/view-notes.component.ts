@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Notes } from 'src/app/shared/interfaces/notes.interface';
+import { NotesService } from 'src/app/shared/services/notes.service';
 
 @Component({
   selector: 'app-view-notes',
@@ -8,8 +10,17 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class ViewNotesComponent implements OnInit {
   noteId: string;
-  constructor (private route: ActivatedRoute) {
-    this.noteId = this.route.snapshot.paramMap.get('noteId') || 'noteId';
+  notes!: Notes;
+  constructor (private route: ActivatedRoute, private notesService: NotesService) {
+    this.noteId = this.route.snapshot.paramMap.get('noteId') as string;
+
+    this.notesService.findCategoryById(this.noteId).subscribe({
+      next: (res) => {
+        this.notes = res.data;
+        /*         console.log(this.notes); */
+      }
+    });
+
   }
 
   ngOnInit(): void {

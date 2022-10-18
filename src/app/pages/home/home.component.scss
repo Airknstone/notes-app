@@ -1,13 +1,17 @@
 .example-card {
-  width: 23rem;
+  width: 80%;
+  margin-bottom: 5px;
+  margin: auto;
 }
-.delete-button {
-  position: absolute;
-  top: 2px;
-  right: 2px;
-
-  #delete {
-    width: 24px !important;
-    color: red;
-  }
+.note-card-container {
+  padding: 2rem;
+}
+.delete-button,
+.menu {
+  display: flex;
+  justify-content: end;
+}
+#delete {
+  color: red;
+  display: block;
 }

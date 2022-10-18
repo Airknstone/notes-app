@@ -15,8 +15,8 @@ const routes: Routes = [
     component: AddCategoryComponent
   },
   {
-    path: 'view-notes/:roleId',
-    component: ViewNotesComponent
+    path: 'view-notes/:noteId',
+    component: ViewNotesComponent, pathMatch: 'full'
   }
 
 
@@ -26,6 +26,7 @@ const routes: Routes = [
   imports: [ RouterModule.forRoot(routes, {
     useHash: true,
     enableTracing: false,
+    anchorScrolling: "enabled",
     scrollPositionRestoration: 'enabled',
     relativeLinkResolution: 'legacy',
   }) ],

@@ -1,17 +1,23 @@
-<ng-container>
-  <mat-toolbar class="example-header">Header <p><button mat-button (click)="sidenav.toggle()">Toggle</button></p>
-  </mat-toolbar>
+<mat-toolbar class="example-header"><button routerLink="/">Header</button>
+  <p><button mat-button (click)="sidenav.toggle()">Toggle</button></p>
+</mat-toolbar>
 
-  <mat-sidenav-container class="example-container">
-    <mat-sidenav #sidenav mode="side" opened class="example-sidenav">
+<mat-sidenav-container class="example-container">
+  <mat-sidenav #sidenav mode="side" opened class="example-sidenav">
 
-    </mat-sidenav>
+    <nav *ngIf="notes">
+      <ul>
+        <li *ngFor="let note of notes">
+          <span (click)="onClickScroll(note._id)">{{note.category}}</span>
+        </li>
+      </ul>
+    </nav>
 
-    <mat-sidenav-content class="sidenav-content">
+  </mat-sidenav>
 
+  <mat-sidenav-content>
+    <div class="sidenav-content">
       <router-outlet></router-outlet>
-
-    </mat-sidenav-content>
-  </mat-sidenav-container>
-
-</ng-container>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

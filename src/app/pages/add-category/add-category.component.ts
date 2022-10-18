@@ -34,6 +34,5 @@ export class AddCategoryComponent implements OnInit {
         this.router.navigate([ '/' ]);
       }
     });
-    console.log(this.addCategory.value);
   }
 }

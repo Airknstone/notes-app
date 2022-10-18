@@ -5,20 +5,35 @@
   <mat-divider></mat-divider>
   <p>&nbsp;</p>
   <button mat-raised-button color="primary" routerLink="/add-category">Add New Category</button>
-  <br>
+  <button *ngIf="checked.length > 0" mat-raised-button color="warn" (click)="deleteGroup()">Delete Group</button>
+  <input type="file" onchange="console.log(event.target.files)">
 
+  <br>
   <p></p>
-  <div *ngIf="notes" fxLayout="row wrap" fxLayoutGap="20px">
-    <div *ngFor="let note of notes">
-      <mat-card class="example-card" fxFlex="100%">
-        <div class="delete-button">
-          <button id="delete" mat-button (click)="deleteNote(note._id)">X</button>
+  <div *ngIf="notes" fxLayout="column">
+    <div *ngFor="let note of notes" class="note-card-container">
+
+      <mat-card class="example-card" id="{{note._id}}">
+        <div class="menu">
+          <mat-checkbox class="example-margin" #{{note._id}} (change)="changeEvent($event, note._id)">Select
+          </mat-checkbox>
+          <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Category Card Options">
+            <mat-icon>more_vert</mat-icon>
+          </button>
         </div>
+        <mat-menu #menu="matMenu">
+          <button mat-button>
+            <mat-icon>edit</mat-icon> Edit
+          </button>
+          <button id="delete" mat-button (click)="deleteNote(note._id)">
+            <mat-icon>delete</mat-icon> Delete
+          </button>
+        </mat-menu>
         <mat-card-title>{{note.category}}</mat-card-title>
-        <mat-card-subtitle>{{note.description}}</mat-card-subtitle>
+
         <mat-card-content>
           <p>
-
+            <mat-card-subtitle>{{note.description}}</mat-card-subtitle>
           </p>
           <br>
         </mat-card-content>
@@ -33,6 +48,6 @@
     </div>
   </div>
 </div>
-<div fxFlex="18" fxHide fxShow.gt-md>
+<div fxFlex="15" fxHide fxShow.gt-md>
   <div>Hello</div>
 </div>

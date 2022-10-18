@@ -6,6 +6,7 @@ const router = express.Router();
 import Notes, { INote, ILinks } from '../models/notes-model';
 
 
+
 /**
  * findAll
  * @openapi
@@ -30,16 +31,39 @@ router.get('/', async (req, res) => {
         console.log(err);
         res.status(500).send(err.message);
       } else {
-        console.log(notes);
+        /*         console.log(notes); */
         res.json({ httpCode: 200, message: 'Success', data: notes });
       }
     });
-  } catch (error) {
+  } catch (error: any) {
     console.log(error);
+    res.status(500).send(error.message);
+  }
+});
+/* Get notes within Category */
+router.get('/:noteId', async (req, res) => {
+  try {
+    Notes.findOne({ _id: req.params[ 'noteId' ] }, (err: Error, note: any) => {
+      if (err) {
+        console.log(err);
+        res.status(500).send(err.message);
+      }
+      else {
+        console.log(note);
+        res.json({
+          httpCode: 200, message: 'Success', data: note
+        });
+      }
+    });
+
+  } catch (error: any) {
+    console.log(error);
+    res.status(500).send(error.message);
   }
 });
 
-/* Add a note api */
+
+/* Add a Category default template api */
 router.post('/', async (req, res) => {
   try {
     const defaultLink: ILinks = {
@@ -84,28 +108,37 @@ router.post('/', async (req, res) => {
   }
 });
 
-/* Update Notes */
+/* Update Category */
 router.put('/:noteId', async (req: express.Request, res: express.Response) => {
   try {
     Notes.findOne({ _id: req.params[ 'noteId' ] }, function (err: any, note: any) {
+      console.log(note);
       if (err) {
         console.log(err);
         res.status(500).send({ message: err.message });
       }
       else {
         console.log(note);
-        const updateNote: INote = {
+        const updateCategory = {
           category: req.body.category,
           description: req.body.description,
-          note: [
-            {
-              noteTitle: req.body.note.noteTitle,
-              noteBody: req.body.note.noteBody,
-              links: [ { linkTitle: req.body.note.links.linkTitle, linkHref: req.body.note.links.linkHref } ],
-            }
-          ]
+          /*           note: [
+                      {
+                        noteTitle: req.body.note.noteTitle,
+                        noteBody: req.body.note.noteBody,
+                        links: [ { linkTitle: req.body.note.links.linkTitle, linkHref: req.body.note.links.linkHref } ],
+                      }
+                          "note": {
+        "noteTitle": "arevae",
+        "noteBody": "aberareav",
+        "links": {
+            "linkTitle": "TItle LInk",
+            "linkHref": "HREFLINK"
+        }
+    }
+                    ] */
         };
-        note.set(updateNote);
+        note.set(updateCategory);
 
         note.save(function (err: any, note: INote) {
           if (err) {
@@ -150,4 +183,32 @@ router.delete('/:noteId', async (req: express.Request, res: express.Response) =>
     console.log(error);
   }
 });
+
+/* Delete Many by Object Ids  */
+router.delete('/delete/:deleteArr', async (req: express.Request, res: express.Response) => {
+  try {
+    let arrObjectId: string[] = req.params[ 'deleteArr' ].split(',');
+    Notes.deleteMany({
+      _id: {
+        $in: arrObjectId
+      }
+    }, function (err: Error, result: any) {
+      if (err) {
+        console.log(err);
+        res.status(500).send({ message: err.message });
+      } else {
+        console.log(result);
+        res.json({
+          httpCode: 200,
+          message: 'Successful Delete of Notes',
+          data: result,
+        });
+      }
+    });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+
 module.exports = router;

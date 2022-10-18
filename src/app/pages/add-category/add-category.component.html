@@ -6,7 +6,7 @@
   <div fxLayout="column">
     <mat-form-field appearance="outline">
       <mat-label>Category Title: </mat-label>
-      <input matInput [formControl]="addCategory.controls['category']" placeholder="Category Title">
+      <input matInput [formControl]="addCategory.controls['category']" placeholder="Category Title" maxlength="80">
       <mat-error class="error" *ngIf="addCategory.controls['category'].invalid">
         Please Enter a Title- Cannot be Empty.
       </mat-error>
