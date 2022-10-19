@@ -27,14 +27,16 @@ import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatListModule } from '@angular/material/list';
-
+import { DialogBoxComponent } from './shared/dialog-box/dialog-box.component';
+import { TextFieldModule } from '@angular/cdk/text-field';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     AddCategoryComponent,
-    ViewNotesComponent
+    ViewNotesComponent,
+    DialogBoxComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +58,8 @@ import { MatListModule } from '@angular/material/list';
     MatDividerModule,
     FormsModule,
     MatMenuModule,
-    MatListModule
+    MatListModule,
+    TextFieldModule
   ],
   providers: [],
   bootstrap: [ AppComponent ]

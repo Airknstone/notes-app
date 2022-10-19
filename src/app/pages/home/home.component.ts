@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { NotesService } from 'src/app/shared/services/notes.service';
+import { ConfirmDialogService } from 'src/app/shared/services/confirm-dialog/confirm-dialog.service';
+import { NotesService } from 'src/app/shared/services/notes-service/notes.service';
 
 
 
@@ -12,21 +13,46 @@ export class HomeComponent implements OnInit {
   notes: any;
   checked: string[];
 
-  constructor (private notesService: NotesService) {
+  dialogRef = {
+    header: 'Add a new Category',
+    label1: 'Title',
+    label2: 'Description',
+    title: '',
+    message: '',
+    confirmText: 'Save',
+    cancelText: 'Cancel',
+  };
+  constructor (private notesService: NotesService, private dialogService: ConfirmDialogService) {
     this.checked = [];
-    this.notesService.findAllNotes().subscribe({
-      next: (res) => {
-        this.notesService.setValue(res.data);
-      },
-      error: (err) => {
-        console.log(err);
-      }
-    });
+
     this.notesService.getValue().subscribe((val) => {
       this.notes = val;
     });
   }
   ngOnInit(): void {
+  }
+
+  openDialog() {
+    this.dialogService.confirmDialog(this.dialogRef).subscribe(newNote => {
+      console.log(newNote);
+      if (newNote !== false) {
+        this.notesService.addCategory(newNote).subscribe({
+          next: (res) => {
+
+            this.notesService.findAllNotes().subscribe({
+              next: (res) => {
+                this.notesService.setValue(res.data);
+              },
+              error: (err) => {
+                console.log(err);
+              }
+            });
+
+          }
+        });
+        console.log(newNote);
+      }
+    });
   }
   addSelected(noteId: string): void {
     console.log('added to array' + noteId);
@@ -64,6 +90,14 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  updateCategory(noteId: string): void {
+    const updateCategory = {
+
+    };
+
+    this.notesService.updateCategory(noteId);
+  }
+
   deleteNote(noteId: string): void {
     console.log(noteId);
     /* Need to add Confirmation Dialogue  */
@@ -79,6 +113,8 @@ export class HomeComponent implements OnInit {
         console.log(err);
       }
     });
+    this.removeSelected(noteId);
   }
+
 
 }

@@ -37,9 +37,10 @@ export class NotesService {
     });
   }
 
-  updateCategory(noteId: string): Observable<any> {
+  updateCategory(noteId: any): Observable<any> {
     return this.http.put<any>(`/api/notes/${noteId}`, {
-
+      category: noteId.category,
+      description: noteId.description,
     });
   }
   deleteNoteCategory(noteId: string): Observable<any> {

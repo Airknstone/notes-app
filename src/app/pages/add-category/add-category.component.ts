@@ -2,8 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { INote } from './../../../../server/models/notes-model';
-import { NotesService } from 'src/app/shared/services/notes.service';
-import { Router } from '@angular/router';
+import { NotesService } from 'src/app/shared/services/notes-service/notes.service'; import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-category',
@@ -31,6 +30,15 @@ export class AddCategoryComponent implements OnInit {
 
     this.notesService.addCategory(newNote).subscribe({
       next: (res) => {
+
+        this.notesService.findAllNotes().subscribe({
+          next: (res) => {
+            this.notesService.setValue(res.data);
+          },
+          error: (err) => {
+            console.log(err);
+          }
+        });
         this.router.navigate([ '/' ]);
       }
     });

@@ -7,8 +7,12 @@
 
     <nav *ngIf="notes">
       <ul>
-        <li *ngFor="let note of notes">
+        <li *ngFor="let note of notes" fxLayoutAlign="center center">
+          <button mat-button class="navigate-button" (click)="navigate(note._id)">
+            <mat-icon class="launch-icon">note</mat-icon> &nbsp;&nbsp;
+          </button>
           <span (click)="onClickScroll(note._id)">{{note.category}}</span>
+
         </li>
       </ul>
     </nav>

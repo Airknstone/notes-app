@@ -11,12 +11,14 @@ html {
   right: 0;
 
   ul {
-    padding-left: 1rem;
+    padding-left: 0rem;
     margin-left: 1rem;
     border-left: 1px solid white;
     li {
+      place-content: start !important;
       list-style: none;
       margin: 5px 0;
+      color: rgb(234, 234, 234);
     }
   }
 }
@@ -26,7 +28,7 @@ html {
   align-items: center;
   justify-content: center;
   width: 268px;
-  background: rgba(2, 131, 109, 0.5);
+  background: rgba(2, 131, 110, 0.836);
 }
 .sidenav-content {
   padding: 5rem 3rem;
@@ -43,4 +45,11 @@ html {
   bottom: 0;
   left: 0;
   right: 0;
+}
+.launch-icon {
+  color: rgb(234, 234, 234);
+  font-size: 16px;
+}
+.navigate-button {
+  padding: 3px;
 }

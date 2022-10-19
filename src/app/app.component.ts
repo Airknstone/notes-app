@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Notes } from './shared/interfaces/notes.interface';
-import { NotesService } from './shared/services/notes.service';
+import { NotesService } from './shared/services/notes-service/notes.service';
 import { Router } from '@angular/router';
 import { ViewportScroller } from '@angular/common';
 @Component({
@@ -14,6 +14,14 @@ export class AppComponent {
   constructor (private notesService: NotesService, private router: Router, private viewPortScroller: ViewportScroller) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.notes = [];
+    this.notesService.findAllNotes().subscribe({
+      next: (res) => {
+        this.notesService.setValue(res.data);
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
     this.notesService.getValue().subscribe((val) => {
       console.log(val);
       this.notes = val;
