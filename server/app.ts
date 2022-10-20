@@ -11,6 +11,7 @@ const chalk = require('chalk');
 const morgan = require('morgan');
 const NotesApi = require('./routes/notes_api');
 
+
 class Server {
   public app: express.Application;
   static bootstrap(): Server {

@@ -8,7 +8,6 @@
   <button mat-raised-button color="primary" (click)="openDialog()">Dialog</button>
   <input type="file" onchange="console.log(event.target.files)">
   <button *ngIf="checked.length > 0" mat-raised-button color="warn" (click)="deleteGroup()">Delete Group</button>
-
   <br>
   <p></p>
   <div *ngIf="notes" fxLayout="column">
@@ -23,7 +22,7 @@
           </button>
         </div>
         <mat-menu #menu="matMenu">
-          <button mat-button>
+          <button mat-button (click)="editDialog(note._id)">
             <mat-icon>edit</mat-icon> Edit
           </button>
           <button id="delete" mat-button (click)="deleteNote(note._id)">

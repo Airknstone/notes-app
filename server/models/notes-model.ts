@@ -1,4 +1,4 @@
-import { Schema, model, Types, Model } from 'mongoose';
+import { Schema, model, Model } from 'mongoose';
 /* subdocument */
 export interface ILinks {
   linkHref: string;

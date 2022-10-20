@@ -11,7 +11,7 @@ import { ViewportScroller } from '@angular/common';
 export class AppComponent {
   title = 'notes-app';
   notes: Notes[];
-  constructor (private notesService: NotesService, private router: Router, private viewPortScroller: ViewportScroller) {
+  constructor (private notesService: NotesService, private router: Router) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.notes = [];
     this.notesService.findAllNotes().subscribe({
@@ -29,7 +29,11 @@ export class AppComponent {
 
   }
   onClickScroll(elementId: string): void {
-    document.getElementById(elementId)?.scrollIntoView({ behavior: 'smooth' });
+    /* Doesnt scroll to element in one click */
+    this.router.navigate([ '/' ]).then(() => {
+      document.getElementById(elementId)?.scrollIntoView({ behavior: 'smooth' });
+    });
+
   }
   navigate(noteId: string) {
     this.router.navigate([ `/view-notes/${noteId}` ]);

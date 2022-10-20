@@ -4,8 +4,8 @@
   <h2>{{notes.category}}</h2>
   <p>{{notes.description}}</p>
 
-  <button mat-raised-button color="primary"> Add new Note</button>
-  <div fxLayout="row">
+  <button mat-raised-button (click)="openDialog()" color="primary"> Add new Note</button>
+  <div fxLayout="row wrap">
     <div *ngFor="let note of notes.note">
       <mat-card class="note-card">
         <p>{{note.noteTitle}}</p>
@@ -13,9 +13,12 @@
 
         <hr>
         <div *ngFor="let links of note.links">
-          <a href="{{links.linkHref}}">{{links.linkTitle}}</a>
+          <a target="_blank" href="https://www.google.com">{{links.linkTitle}}</a>
 
         </div>
+        <mat-card-actions>
+          <button>add link</button>
+        </mat-card-actions>
       </mat-card>
     </div>
   </div>

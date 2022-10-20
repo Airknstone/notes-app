@@ -28,7 +28,7 @@ const routes: Routes = [
     enableTracing: false,
     anchorScrolling: "enabled",
     scrollPositionRestoration: 'enabled',
-    relativeLinkResolution: 'legacy',
+    relativeLinkResolution: 'legacy', scrollOffset: [ 0, 0 ],
   }) ],
   exports: [ RouterModule ]
 })

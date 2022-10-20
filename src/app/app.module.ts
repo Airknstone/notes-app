@@ -29,6 +29,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatListModule } from '@angular/material/list';
 import { DialogBoxComponent } from './shared/dialog-box/dialog-box.component';
 import { TextFieldModule } from '@angular/cdk/text-field';
+import { AddLinkDialogComponent } from './pages/add-link-dialog/add-link-dialog.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { TextFieldModule } from '@angular/cdk/text-field';
     HomeComponent,
     AddCategoryComponent,
     ViewNotesComponent,
-    DialogBoxComponent
+    DialogBoxComponent,
+    AddLinkDialogComponent
   ],
   imports: [
     BrowserModule,

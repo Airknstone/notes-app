@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ConfirmDialogService } from 'src/app/shared/services/confirm-dialog/confirm-dialog.service';
 import { NotesService } from 'src/app/shared/services/notes-service/notes.service';
 
@@ -22,7 +23,7 @@ export class HomeComponent implements OnInit {
     confirmText: 'Save',
     cancelText: 'Cancel',
   };
-  constructor (private notesService: NotesService, private dialogService: ConfirmDialogService) {
+  constructor (private notesService: NotesService, private dialogService: ConfirmDialogService, private router: Router) {
     this.checked = [];
 
     this.notesService.getValue().subscribe((val) => {
@@ -32,13 +33,56 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  editDialog(noteId: string) {
+    let dialogEdit = {
+      header: 'Add a new Category',
+      label1: 'Title',
+      label2: 'Description',
+      title: '',
+      message: '',
+      confirmText: 'Save',
+      cancelText: 'Cancel',
+    };
+    this.notesService.findCategoryById(noteId).subscribe({
+      next: (res) => {
+        dialogEdit.header = "Editing Category";
+        dialogEdit.title = res.data.category;
+        dialogEdit.message = res.data.description;
+
+        this.dialogService.confirmDialog(dialogEdit).subscribe(newNote => {
+          console.log(newNote);
+          if (newNote !== false) {
+            this.notesService.updateCategory(noteId, newNote).subscribe({
+              next: (res) => {
+                this.router.navigate([ '/' ]);
+                this.notesService.findAllNotes().subscribe({
+                  next: (res) => {
+                    this.notesService.setValue(res.data);
+                  },
+                  error: (err) => {
+                    console.log(err);
+                  }
+                });
+              }
+            });
+            console.log(newNote);
+          }
+        });
+
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
+
+  }
+
   openDialog() {
     this.dialogService.confirmDialog(this.dialogRef).subscribe(newNote => {
       console.log(newNote);
       if (newNote !== false) {
         this.notesService.addCategory(newNote).subscribe({
           next: (res) => {
-
             this.notesService.findAllNotes().subscribe({
               next: (res) => {
                 this.notesService.setValue(res.data);
@@ -47,7 +91,6 @@ export class HomeComponent implements OnInit {
                 console.log(err);
               }
             });
-
           }
         });
         console.log(newNote);
@@ -90,13 +133,6 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  updateCategory(noteId: string): void {
-    const updateCategory = {
-
-    };
-
-    this.notesService.updateCategory(noteId);
-  }
 
   deleteNote(noteId: string): void {
     console.log(noteId);

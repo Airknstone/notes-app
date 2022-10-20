@@ -1,9 +1,7 @@
-import { INoteItems } from './../../src/app/shared/interfaces/notes.interface';
-
 
 import express from 'express';
 const router = express.Router();
-import Notes, { INote, ILinks } from '../models/notes-model';
+import Notes, { INote, ILinks, INoteItems } from '../models/notes-model';
 
 
 
@@ -122,21 +120,6 @@ router.put('/:noteId', async (req: express.Request, res: express.Response) => {
         const updateCategory = {
           category: req.body.category,
           description: req.body.description,
-          /*           note: [
-                      {
-                        noteTitle: req.body.note.noteTitle,
-                        noteBody: req.body.note.noteBody,
-                        links: [ { linkTitle: req.body.note.links.linkTitle, linkHref: req.body.note.links.linkHref } ],
-                      }
-                          "note": {
-        "noteTitle": "arevae",
-        "noteBody": "aberareav",
-        "links": {
-            "linkTitle": "TItle LInk",
-            "linkHref": "HREFLINK"
-        }
-    }
-                    ] */
         };
         note.set(updateCategory);
 
@@ -210,5 +193,50 @@ router.delete('/delete/:deleteArr', async (req: express.Request, res: express.Re
   }
 });
 
+
+/* ********************************
+Adding Notes and Links to Catergory
+******************************** */
+
+/* add a new Note */
+router.post('/:noteId/note', async (req: express.Request, res: express.Response) => {
+  try {
+    Notes.findOneAndUpdate(
+      { _id: req.params[ 'noteId' ] },
+      {
+        $push: {
+          note: {
+            $each: [ {
+              noteTitle: req.body.noteTitle,
+              noteBody: req.body.noteBody,
+              links: [
+                {
+                  linkTitle: req.body.linkTitle,
+                  linkHref: req.body.linkHref
+                }
+              ]
+            } ]
+
+          }
+        }
+      }
+      , function (err: Error, update: any) {
+        if (err) {
+          res.status(500).send({ message: err.message });
+        }
+        else {
+          res.json({
+            httpCode: 200,
+            message: 'Successful Adding of Notes',
+            data: update,
+          });
+        }
+      });
+
+  } catch (error) {
+    console.log(error);
+
+  }
+});
 
 module.exports = router;

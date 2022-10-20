@@ -15,20 +15,21 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 export class DialogBoxComponent implements OnInit {
 
   addCategory = new FormGroup({
-    title: new FormControl(null, [ Validators.required ]),
-    message: new FormControl(null, [ Validators.required ])
+    title: new FormControl('', [ Validators.required ]),
+    message: new FormControl('', [ Validators.required ])
   });
   constructor (@Inject(MAT_DIALOG_DATA) public data: DialogData, private _ngZone: NgZone, public dialogRef: MatDialogRef<DialogBoxComponent>) {
-
+    if (data) {
+      this.addCategory.controls[ 'title' ].setValue(data.title),
+        this.addCategory.controls[ 'message' ].setValue(data.message);
+    }
   }
   onclose() {
     const newData = {
       category: this.addCategory.controls[ 'title' ].value,
       description: this.addCategory.controls[ 'message' ].value,
-      notes: []
+
     };
-
-
     this.dialogRef.close(newData);
   }
   @ViewChild('autosize') autosize!: CdkTextareaAutosize;

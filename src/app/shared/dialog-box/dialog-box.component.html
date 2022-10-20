@@ -3,29 +3,29 @@
     <h1>{{data.header}}</h1>
 
     <div fxLayout="row" fxLayoutAlign="space-between center">
-      <p></p> <button [mat-dialog-close]="false">
+      <p>{{data.title}}</p> <button [mat-dialog-close]="false">
         <mat-icon>close</mat-icon>
       </button>
     </div>
-    <mat-form-field appearance="outline">
+    <mat-form-field appearance="legacy">
       <mat-label>{{data.label1}} </mat-label>
-      <input matInput type="text" value="{{data.title}}" [formControl]="addCategory.controls['title']" maxlength="80">
+      <input class="input-text" matInput type="text" [formControl]="addCategory.controls['title']" maxlength="80">
       <mat-error class="error" *ngIf="addCategory.controls['title'].invalid">
         Please Enter a Title- Cannot be Empty.
       </mat-error>
     </mat-form-field>
 
-    <mat-form-field appearance="outline">
+    <mat-form-field appearance="legacy">
       <mat-label>{{data.label2}}</mat-label>
-      <textarea matInput type="text" value="{{data.message}}" cdkTextareaAutosize
+      <textarea class="input-text" matInput type="text" cdkTextareaAutosize
         [formControl]="addCategory.controls['message']" #autosize="cdkTextareaAutosize"></textarea>
       <mat-error class="error" *ngIf="addCategory.controls['message'].invalid">
         Please Enter a Description- Cannot be Empty.
       </mat-error>
     </mat-form-field>
+
   </div>
 </form>
-
 
 <div mat-dialog-actions fxLayoutAlign="end stretch">
   <button mat-button color="warn" [mat-dialog-close]="false">{{data.cancelText}}</button>
