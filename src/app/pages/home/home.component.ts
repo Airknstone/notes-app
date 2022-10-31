@@ -13,6 +13,7 @@ import { NotesService } from 'src/app/shared/services/notes-service/notes.servic
 export class HomeComponent implements OnInit {
   notes: any;
   checked: string[];
+  adding: boolean = false;
 
   dialogRef = {
     header: 'Add a new Category',
@@ -32,7 +33,10 @@ export class HomeComponent implements OnInit {
   }
   ngOnInit(): void {
   }
-
+  addTest() {
+    this.adding = !this.adding;
+    console.log(this.adding);
+  }
   editDialog(noteId: string) {
     let dialogEdit = {
       header: 'Add a new Category',

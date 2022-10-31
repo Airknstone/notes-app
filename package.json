@@ -9,6 +9,13 @@
     "server": "nodemon ./server/app.ts",
     "test": "ng test"
   },
+  "nodemonConfig": {
+    "ignore": [
+      "src/**",
+      "**/docs/**"
+    ],
+    "delay": 2500
+  },
   "private": true,
   "dependencies": {
     "@angular/animations": "^14.2.0",

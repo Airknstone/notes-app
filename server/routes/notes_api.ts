@@ -1,9 +1,10 @@
 
+
 import express from 'express';
 const router = express.Router();
 import Notes, { INote, ILinks, INoteItems } from '../models/notes-model';
 
-
+import Category, { ICategory } from './../models/category.mode';
 
 /**
  * findAll
@@ -24,12 +25,12 @@ import Notes, { INote, ILinks, INoteItems } from '../models/notes-model';
  */
 router.get('/', async (req, res) => {
   try {
-    Notes.find({}, (err: Error, notes: any) => {
+    Category.find({}, (err: Error, notes: ICategory) => {
       if (err) {
         console.log(err);
         res.status(500).send(err.message);
       } else {
-        /*         console.log(notes); */
+        console.log(notes);
         res.json({ httpCode: 200, message: 'Success', data: notes });
       }
     });
@@ -41,7 +42,7 @@ router.get('/', async (req, res) => {
 /* Get notes within Category */
 router.get('/:noteId', async (req, res) => {
   try {
-    Notes.findOne({ _id: req.params[ 'noteId' ] }, (err: Error, note: any) => {
+    Category.findOne({ _id: req.params[ 'noteId' ] }, (err: Error, note: ICategory) => {
       if (err) {
         console.log(err);
         res.status(500).send(err.message);
@@ -64,40 +65,21 @@ router.get('/:noteId', async (req, res) => {
 /* Add a Category default template api */
 router.post('/', async (req, res) => {
   try {
-    const defaultLink: ILinks = {
-      linkTitle: "Enter a Title",
-      linkHref: "Enter a URL"
-    };
-    const defaultInotesItems: INoteItems = {
-      noteTitle: 'Enter Note Title',
-      noteBody: "Enter Notes...",
-      links: [ defaultLink ]
-    };
-    const note: INote = {
+
+    const category: ICategory = {
       category: req.body.category,
-      description: req.body.description,
-      note: [
-        {
-          noteTitle: req.body.note.noteTitle ? req.body.note.noteTitle : defaultInotesItems.noteTitle,
-          noteBody: req.body.note.noteBody ? req.body.note.noteBody : defaultInotesItems.noteBody,
-          links: [ {
-            linkTitle: req.body.note.links.linkTitle ? req.body.note.links.linkTitle : defaultLink.linkTitle,
-            linkHref: req.body.note.links.linkHref ? req.body.note.links.linkHref : defaultLink.linkHref
-          } ],
-        }
-      ]
+      description: req.body.description
     };
-    console.log(note);
-    Notes.create(note, function (err: any, note: any) {
+    Category.create(category, function (err: any, category: ICategory) {
       if (err) {
         console.log(err);
         res.status(500).send({ message: err.message });
       } else {
-        console.log(note);
+        console.log(category);
         res.json({
           httpCode: 200,
-          message: 'Successful Post of a Note',
-          data: note,
+          message: 'Successful Post of a category',
+          data: category,
         });
       }
     });
@@ -109,7 +91,7 @@ router.post('/', async (req, res) => {
 /* Update Category */
 router.put('/:noteId', async (req: express.Request, res: express.Response) => {
   try {
-    Notes.findOne({ _id: req.params[ 'noteId' ] }, function (err: any, note: any) {
+    Category.findOne({ _id: req.params[ 'noteId' ] }, function (err: any, note: any) {
       console.log(note);
       if (err) {
         console.log(err);
@@ -117,13 +99,13 @@ router.put('/:noteId', async (req: express.Request, res: express.Response) => {
       }
       else {
         console.log(note);
-        const updateCategory = {
+        const updateCategory: ICategory = {
           category: req.body.category,
           description: req.body.description,
         };
         note.set(updateCategory);
 
-        note.save(function (err: any, note: INote) {
+        note.save(function (err: any, note: ICategory) {
           if (err) {
             console.log(err);
             res.status(500).send({ message: err.message });
@@ -147,7 +129,7 @@ router.put('/:noteId', async (req: express.Request, res: express.Response) => {
 /* Delete a note api */
 router.delete('/:noteId', async (req: express.Request, res: express.Response) => {
   try {
-    Notes.findByIdAndDelete({ _id: req.params[ 'noteId' ] }, function (err: any, note: any) {
+    Category.findByIdAndDelete({ _id: req.params[ 'noteId' ] }, function (err: Error, note: ICategory) {
       if (err) {
         console.log(err);
         res.status(500).send({ message: err.message });
@@ -171,7 +153,7 @@ router.delete('/:noteId', async (req: express.Request, res: express.Response) =>
 router.delete('/delete/:deleteArr', async (req: express.Request, res: express.Response) => {
   try {
     let arrObjectId: string[] = req.params[ 'deleteArr' ].split(',');
-    Notes.deleteMany({
+    Category.deleteMany({
       _id: {
         $in: arrObjectId
       }
@@ -201,7 +183,18 @@ Adding Notes and Links to Catergory
 /* add a new Note */
 router.post('/:noteId/note', async (req: express.Request, res: express.Response) => {
   try {
-    Notes.findOneAndUpdate(
+
+    /*     const noteBody: INoteItems = {
+          noteTitle: req.body.noteTitle,
+          noteBody: req.body.noteBody,
+          links: [
+            {
+              linkTitle: req.body.links.linkTitle,
+              linkHref: req.body.links.linkHref
+            }
+          ]
+        } */
+    Category.findOneAndUpdate(
       { _id: req.params[ 'noteId' ] },
       {
         $push: {
@@ -211,8 +204,8 @@ router.post('/:noteId/note', async (req: express.Request, res: express.Response)
               noteBody: req.body.noteBody,
               links: [
                 {
-                  linkTitle: req.body.linkTitle,
-                  linkHref: req.body.linkHref
+                  linkTitle: req.body.links.linkTitle,
+                  linkHref: req.body.links.linkHref
                 }
               ]
             } ]
@@ -225,6 +218,7 @@ router.post('/:noteId/note', async (req: express.Request, res: express.Response)
           res.status(500).send({ message: err.message });
         }
         else {
+          console.log(update);
           res.json({
             httpCode: 200,
             message: 'Successful Adding of Notes',
