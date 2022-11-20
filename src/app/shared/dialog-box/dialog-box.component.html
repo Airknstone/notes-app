@@ -7,7 +7,7 @@
         <mat-icon>close</mat-icon>
       </button>
     </div>
-    <mat-form-field appearance="legacy">
+    <mat-form-field appearance="outline">
       <mat-label>{{data.label1}} </mat-label>
       <input class="input-text" matInput type="text" [formControl]="addCategory.controls['title']" maxlength="80">
       <mat-error class="error" *ngIf="addCategory.controls['title'].invalid">
@@ -15,9 +15,9 @@
       </mat-error>
     </mat-form-field>
 
-    <mat-form-field appearance="legacy">
+    <mat-form-field appearance="outline">
       <mat-label>{{data.label2}}</mat-label>
-      <textarea class="input-text" matInput type="text" cdkTextareaAutosize
+      <textarea class="input-text text-area" matInput type="text" cdkTextareaAutosize
         [formControl]="addCategory.controls['message']" #autosize="cdkTextareaAutosize"></textarea>
       <mat-error class="error" *ngIf="addCategory.controls['message'].invalid">
         Please Enter a Description- Cannot be Empty.

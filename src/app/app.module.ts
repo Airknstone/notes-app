@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 
+/* QUill */
+import { QuillModule } from 'ngx-quill';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './pages/home/home.component';
@@ -61,7 +63,8 @@ import { AddLinkDialogComponent } from './pages/add-link-dialog/add-link-dialog.
     FormsModule,
     MatMenuModule,
     MatListModule,
-    TextFieldModule
+    TextFieldModule,
+    QuillModule
   ],
   providers: [],
   bootstrap: [ AppComponent ]

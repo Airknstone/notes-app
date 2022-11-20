@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { INote } from 'server/models/notes-model';
+
 
 @Injectable({
   providedIn: 'root'
@@ -25,18 +25,28 @@ export class NotesService {
   findCategoryById(noteId: string): Observable<any> {
     return this.http.get<any>(`/api/notes/${noteId}`);
   }
-  addCategory(note: INote): Observable<any> {
+  addCategory(note: any): Observable<any> {
     return this.http.post<any>('/api/notes', {
       category: note.category,
       description: note.description,
-      note: {
-        noteTitle: "",
-        noteBody: "",
-        links: {}
-      }
+      /*       note: {
+              noteTitle: "",
+              noteBody: "",
+              links: {}
+            } */
     });
   }
-
+  addNote(noteId: any, data: any): Observable<any> {
+    return this.http.put(`/api/notes/${noteId}/note`,
+      {
+        noteTitle: data.noteTitle,
+        noteBody: data.noteBody,
+        links: {
+          linkTitle: data.body.links.linkTitle,
+          linkHref: data.body.links.linkHref
+        }
+      });
+  };
   updateCategory(noteId: any, data: any): Observable<any> {
     return this.http.put<any>(`/api/notes/${noteId}`, {
       category: data.category,

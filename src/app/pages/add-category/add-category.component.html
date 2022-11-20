@@ -16,7 +16,8 @@
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Category Description: </mat-label>
-      <input matInput [formControl]="addCategory.controls['description']" placeholder="Category Description">
+      <input matInput class="text-area" [formControl]="addCategory.controls['description']"
+        placeholder="Category Description">
       <mat-error class="error" *ngIf="addCategory.controls['description'].invalid">
         Please Enter a Description- Cannot be Empty.
       </mat-error>

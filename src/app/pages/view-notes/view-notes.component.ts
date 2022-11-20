@@ -30,6 +30,7 @@ export class ViewNotesComponent implements OnInit {
       width: '80vw',
       height: '95vh',
       disableClose: true,
+
     });
   }
   ngOnInit(): void {

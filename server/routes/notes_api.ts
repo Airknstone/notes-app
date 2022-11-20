@@ -194,7 +194,7 @@ router.post('/:noteId/note', async (req: express.Request, res: express.Response)
             }
           ]
         } */
-    Category.findOneAndUpdate(
+    Notes.findOneAndUpdate(
       { _id: req.params[ 'noteId' ] },
       {
         $push: {
@@ -233,4 +233,5 @@ router.post('/:noteId/note', async (req: express.Request, res: express.Response)
   }
 });
 
+/* AddLinks to Note */
 module.exports = router;
