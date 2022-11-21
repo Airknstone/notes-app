@@ -13,7 +13,7 @@ import { NotesService } from 'src/app/shared/services/notes-service/notes.servic
 export class ViewNotesComponent implements OnInit {
   noteId: string;
   notes!: Notes;
-
+  htmlStr: string = '';
   constructor (private route: ActivatedRoute, private notesService: NotesService, private dialog: MatDialog) {
     this.noteId = this.route.snapshot.paramMap.get('noteId') as string;
 
@@ -23,6 +23,11 @@ export class ViewNotesComponent implements OnInit {
         console.log(this.notes);
       }
     });
+
+  }
+  addNote(item: any) {
+    console.log(item);
+    this.htmlStr += JSON.stringify(item);
 
   }
   openDialog() {

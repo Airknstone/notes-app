@@ -1,0 +1,20 @@
+<div class="container">
+
+  <form [formGroup]="noteSection">
+    <mat-form-field appearance="outline">
+      <mat-label>Title: </mat-label>
+      <input class="input-text" matInput type="text" formControlName="title" maxlength="80">
+      <mat-error class="error" *ngIf="noteSection.controls['title'].invalid">
+        Please Enter a Title- Cannot be Empty.
+      </mat-error>
+    </mat-form-field>
+
+    <quill-editor formControlName="control" class="content-editor" (onEditorChanged)="changedEditor($event)"
+      [styles]="{'min-height': '320px'}">
+    </quill-editor>
+
+  </form>
+
+  <br> <br>
+  <button mat-raised-button color="primary" (click)="save()">Save</button>
+</div>

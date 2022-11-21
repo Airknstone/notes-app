@@ -4,6 +4,10 @@
   <h2>{{notes.category}}</h2>
   <p>{{notes.description}}</p>
 
+  <br>
+  <div [innerHTML]="htmlStr"></div>
+  <br>
+  <app-richtexteditor (note)="addNote($event)"></app-richtexteditor> <br>
   <button mat-raised-button (click)="openDialog()" color="primary"> Add new Note</button>
   <div fxLayout="row wrap">
     <div *ngFor="let note of notes.note">

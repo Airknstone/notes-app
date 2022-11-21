@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+
 import { ConfirmDialogService } from 'src/app/shared/services/confirm-dialog/confirm-dialog.service';
 import { NotesService } from 'src/app/shared/services/notes-service/notes.service';
 
@@ -14,17 +15,7 @@ export class HomeComponent implements OnInit {
   notes: any;
   checked: string[];
   adding: boolean = false;
-  QuillConfiguration = {
-    toolbar: [
-      [ 'bold', 'italic', 'underline', 'strike' ],
-      [ 'blockquote', 'code-block' ],
-      [ { list: 'ordered' }, { list: 'bullet' } ],
-      [ { header: [ 1, 2, 3, 4, 5, 6, false ] } ],
-      [ { color: [] }, { background: [] } ],
-      [ 'link' ],
-      [ 'clean' ],
-    ],
-  };
+
   dialogRef = {
     header: 'Add a new Category',
     label1: 'Title',

@@ -32,6 +32,7 @@ import { MatListModule } from '@angular/material/list';
 import { DialogBoxComponent } from './shared/dialog-box/dialog-box.component';
 import { TextFieldModule } from '@angular/cdk/text-field';
 import { AddLinkDialogComponent } from './pages/add-link-dialog/add-link-dialog.component';
+import { RichtexteditorComponent } from './shared/richtexteditor/richtexteditor.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { AddLinkDialogComponent } from './pages/add-link-dialog/add-link-dialog.
     AddCategoryComponent,
     ViewNotesComponent,
     DialogBoxComponent,
-    AddLinkDialogComponent
+    AddLinkDialogComponent,
+    RichtexteditorComponent
   ],
   imports: [
     BrowserModule,
