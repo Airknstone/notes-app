@@ -13,7 +13,11 @@ import { NotesService } from 'src/app/shared/services/notes-service/notes.servic
 export class ViewNotesComponent implements OnInit {
   noteId: string;
   notes!: Notes;
-  htmlStr: string = '';
+  notesArray: {
+    title: string,
+    description: string;
+    tag: string;
+  }[] = [];
   constructor (private route: ActivatedRoute, private notesService: NotesService, private dialog: MatDialog) {
     this.noteId = this.route.snapshot.paramMap.get('noteId') as string;
 
@@ -27,7 +31,8 @@ export class ViewNotesComponent implements OnInit {
   }
   addNote(item: any) {
     console.log(item);
-    this.htmlStr += JSON.stringify(item);
+    this.notesArray.push(item);
+    console.log(this.notesArray);
 
   }
   openDialog() {

@@ -5,7 +5,20 @@
   <p>{{notes.description}}</p>
 
   <br>
-  <div [innerHTML]="htmlStr"></div>
+  <!--   <div [innerHTML]="htmlStr"></div> -->
+  <div *ngIf="notesArray.length > 0">
+    <div *ngFor="let notes of notesArray">
+      <h1> {{notes.title }}</h1>
+      <span style="background-color:rgb(0, 247, 255) ;"> {{notes.tag }}</span>
+      <div [innerHTML]="notes.description"></div>
+    </div>
+
+
+  </div>
+
+
+
+
   <br>
   <app-richtexteditor (note)="addNote($event)"></app-richtexteditor> <br>
   <button mat-raised-button (click)="openDialog()" color="primary"> Add new Note</button>

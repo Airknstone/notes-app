@@ -8,6 +8,14 @@
         Please Enter a Title- Cannot be Empty.
       </mat-error>
     </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Tag: </mat-label>
+      <mat-select formControlName="tag" name="tag">
+        <mat-option *ngFor="let tag of tag" [value]="tag.tag">
+          {{tag.tag}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
 
     <quill-editor formControlName="control" class="content-editor" (onEditorChanged)="changedEditor($event)"
       [styles]="{'min-height': '320px'}">
