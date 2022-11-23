@@ -5,7 +5,10 @@ const router = express.Router();
 import Notes, { INote, ILinks, INoteItems } from '../models/notes-model';
 
 import Category, { ICategory } from './../models/category.mode';
+const { getNotes } = require('../controller/notes');
 
+
+router.get('/', getNotes);
 /**
  * findAll
  * @openapi
@@ -23,7 +26,7 @@ import Category, { ICategory } from './../models/category.mode';
  *       '501':
  *         description: MongoDB exception
  */
-router.get('/', async (req, res) => {
+/* router.get('/', async (req, res) => {
   try {
     Category.find({}, (err: Error, notes: ICategory) => {
       if (err) {
@@ -38,7 +41,7 @@ router.get('/', async (req, res) => {
     console.log(error);
     res.status(500).send(error.message);
   }
-});
+}); */
 /* Get notes within Category */
 router.get('/:noteId', async (req, res) => {
   try {
