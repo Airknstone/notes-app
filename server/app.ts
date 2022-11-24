@@ -10,7 +10,7 @@ const swaggerJsdoc = require('swagger-jsdoc');
 const chalk = require('chalk');
 const morgan = require('morgan');
 const NotesApi = require('./routes/notes_api');
-
+const errorHandler = require('./middleware/errorHandler');
 
 class Server {
   public app: express.Application;
@@ -69,6 +69,9 @@ class Server {
       swaggerUiExpress.serve,
       swaggerUiExpress.setup(openapiSpecifications),
     );
+    this.app.use('/api/notes', NotesApi);
+    this.app.use(errorHandler);
+
 
     /**
      * Get port from environment and store in Express.
@@ -81,7 +84,7 @@ class Server {
      */
     const server = http.createServer(this.app);
 
-    this.app.use('/api/notes', NotesApi);
+
     /**
      * Listen on provided port, on all network interfaces.
      */

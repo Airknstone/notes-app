@@ -5,10 +5,10 @@ const router = express.Router();
 import Notes, { INote, ILinks, INoteItems } from '../models/notes-model';
 
 import Category, { ICategory } from './../models/category.mode';
-const { getNotes } = require('../controller/notes');
+const notesController = require('../controller/notes.controller');
 
 
-router.get('/', getNotes);
+
 /**
  * findAll
  * @openapi
@@ -26,43 +26,11 @@ router.get('/', getNotes);
  *       '501':
  *         description: MongoDB exception
  */
-/* router.get('/', async (req, res) => {
-  try {
-    Category.find({}, (err: Error, notes: ICategory) => {
-      if (err) {
-        console.log(err);
-        res.status(500).send(err.message);
-      } else {
-        console.log(notes);
-        res.json({ httpCode: 200, message: 'Success', data: notes });
-      }
-    });
-  } catch (error: any) {
-    console.log(error);
-    res.status(500).send(error.message);
-  }
-}); */
-/* Get notes within Category */
-router.get('/:noteId', async (req, res) => {
-  try {
-    Category.findOne({ _id: req.params[ 'noteId' ] }, (err: Error, note: ICategory) => {
-      if (err) {
-        console.log(err);
-        res.status(500).send(err.message);
-      }
-      else {
-        console.log(note);
-        res.json({
-          httpCode: 200, message: 'Success', data: note
-        });
-      }
-    });
+router.get('/', notesController.getNotesCategory);
 
-  } catch (error: any) {
-    console.log(error);
-    res.status(500).send(error.message);
-  }
-});
+
+/* Get notes within Category */
+router.get('/:noteId', notesController.getNotesCategoryById);
 
 
 /* Add a Category default template api */
