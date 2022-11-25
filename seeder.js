@@ -101,6 +101,11 @@ var deleteData = function () { return __awaiter(void 0, void 0, void 0, function
         }
     });
 }); };
+/* seeds database with json document
+Use:
+node seeder.js i
+or
+node seeder.js d */
 if (process.argv[2] === 'i') {
     importData();
 }

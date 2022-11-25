@@ -53,6 +53,12 @@ const deleteData = async () => {
   }
 };
 
+/* seeds database with json document
+Use:
+node seeder.js i
+or
+node seeder.js d */
+
 if (process.argv[ 2 ] === 'i') {
   importData();
 } else if (process.argv[ 2 ] === 'd') {
