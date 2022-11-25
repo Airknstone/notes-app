@@ -16,6 +16,7 @@ export class AppComponent {
     this.notes = [];
     this.notesService.findAllNotes().subscribe({
       next: (res) => {
+        console.log(res.data);
         this.notesService.setValue(res.data);
       },
       error: (err) => {

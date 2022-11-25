@@ -2,7 +2,7 @@
 
 import express from 'express';
 const router = express.Router();
-import Notes, { INote, ILinks, INoteItems } from '../models/notes-model';
+import Notes, { INote, ITag, INoteItems } from '../models/notes-model';
 
 import Category, { ICategory } from './../models/category.mode';
 const notesController = require('../controller/notes.controller');
@@ -26,15 +26,16 @@ const notesController = require('../controller/notes.controller');
  *       '501':
  *         description: MongoDB exception
  */
-router.get('/', notesController.getNotesCategory);
+router.get('/', notesController.getNotesFolder);
 
 
 /* Get notes within Category */
-router.get('/:noteId', notesController.getNotesCategoryById);
+router.get('/:noteId', notesController.getNotesFolderById);
 
 
 /* Add a Category default template api */
-router.post('/', async (req, res) => {
+router.post('/', notesController.createNotesFolder);
+/* router.post('/', async (req, res) => {
   try {
 
     const category: ICategory = {
@@ -57,7 +58,7 @@ router.post('/', async (req, res) => {
   } catch (error) {
     console.log(error);
   }
-});
+}); */
 
 /* Update Category */
 router.put('/:noteId', async (req: express.Request, res: express.Response) => {

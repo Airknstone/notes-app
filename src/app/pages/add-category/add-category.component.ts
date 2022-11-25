@@ -11,7 +11,7 @@ import { NotesService } from 'src/app/shared/services/notes-service/notes.servic
 })
 export class AddCategoryComponent implements OnInit {
   addCategory = new FormGroup({
-    category: new FormControl(null, [ Validators.required ]),
+    folderName: new FormControl(null, [ Validators.required ]),
     description: new FormControl(null, [ Validators.required ])
   });
 
@@ -23,9 +23,9 @@ export class AddCategoryComponent implements OnInit {
 
   onSubmit() {
     const newNote: INote = {
-      category: this.addCategory.controls[ 'category' ].value || "Category TItle from OnSubmit",
+      folderName: this.addCategory.controls[ 'folderName' ].value || "Category TItle from OnSubmit",
       description: this.addCategory.controls[ 'description' ].value || "Description from on submit",
-      note: []
+      notes: []
     };
 
     this.notesService.addCategory(newNote).subscribe({

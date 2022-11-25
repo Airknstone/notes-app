@@ -1,19 +1,18 @@
-export interface ILinks {
-  linkHref: string;
-  linkTitle: string,
+export interface ITag {
+  tag: string;
 
 }
 /* Subdocument definition */
 export interface INoteItems {
   noteTitle: string,
   noteBody: string,
-  links: ILinks[];
+  tags: ITag[];
 }
 
 /* Document Definition */
 export interface Notes {
   _id: string,
-  category: string,
+  folderName: string,
   description: string,
   note: INoteItems[];
 }

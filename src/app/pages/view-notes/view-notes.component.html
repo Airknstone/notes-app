@@ -1,7 +1,7 @@
 <div class="note-card-container" *ngIf="notes" fxLayout="column">
 
   {{notes._id}}
-  <h2>{{notes.category}}</h2>
+  <h2>{{notes.folderName}}</h2>
   <p>{{notes.description}}</p>
 
   <br>
@@ -29,10 +29,6 @@
         <p>{{note.noteBody}}</p>
 
         <hr>
-        <div *ngFor="let links of note.links">
-          <a target="_blank" href="https://www.google.com">{{links.linkTitle}}</a>
-
-        </div>
 
         <mat-card-actions>
           <button>add link</button>

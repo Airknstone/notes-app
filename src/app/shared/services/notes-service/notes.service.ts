@@ -16,9 +16,11 @@ export class NotesService {
   }
 
   setValue(newValue: any): void {
+    console.log(newValue);
     this._notesStream.next(newValue);
   }
   findAllNotes(): Observable<any> {
+    console.log('Running findAllNotes');
     return this.http.get<any>('/api/notes');
   }
 

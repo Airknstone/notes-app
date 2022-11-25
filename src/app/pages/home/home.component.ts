@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 
 import { ConfirmDialogService } from 'src/app/shared/services/confirm-dialog/confirm-dialog.service';
 import { NotesService } from 'src/app/shared/services/notes-service/notes.service';
-
+import { Notes } from 'src/app/shared/interfaces/notes.interface';
 
 
 @Component({
@@ -12,7 +12,7 @@ import { NotesService } from 'src/app/shared/services/notes-service/notes.servic
   styleUrls: [ './home.component.scss' ]
 })
 export class HomeComponent implements OnInit {
-  notes: any;
+  notes: Notes[];
   checked: string[];
   adding: boolean = false;
 
@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit {
   };
   constructor (private notesService: NotesService, private dialogService: ConfirmDialogService, private router: Router) {
     this.checked = [];
-
+    this.notes = [];
     this.notesService.getValue().subscribe((val) => {
       this.notes = val;
     });
