@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
-
+import { Notes } from '../../interfaces/notes.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -27,15 +27,10 @@ export class NotesService {
   findCategoryById(noteId: string): Observable<any> {
     return this.http.get<any>(`/api/notes/${noteId}`);
   }
-  addCategory(note: any): Observable<any> {
+  addFolder(note: Notes): Observable<any> {
     return this.http.post<any>('/api/notes', {
-      category: note.category,
+      folderName: note.folderName,
       description: note.description,
-      /*       note: {
-              noteTitle: "",
-              noteBody: "",
-              links: {}
-            } */
     });
   }
   addNote(noteId: any, data: any): Observable<any> {

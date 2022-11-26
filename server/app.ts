@@ -55,7 +55,7 @@ class Server {
       .connect(CONN)
       .then(() => {
         console.log(
-          chalk.bgGreenBright('Connection to database was successful'),
+          chalk.bgCyan('Connection to database was successful'),
         );
       })
       .catch((err) => {

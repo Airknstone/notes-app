@@ -23,7 +23,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { AddCategoryComponent } from './pages/add-category/add-category.component';
+import { AddFolderComponent } from './pages/add-folder/add-folder.component';
 import { ViewNotesComponent } from './pages/view-notes/view-notes.component';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
@@ -39,7 +39,7 @@ import { RichtexteditorComponent } from './shared/richtexteditor/richtexteditor.
   declarations: [
     AppComponent,
     HomeComponent,
-    AddCategoryComponent,
+    AddFolderComponent,
     ViewNotesComponent,
     DialogBoxComponent,
     AddLinkDialogComponent,

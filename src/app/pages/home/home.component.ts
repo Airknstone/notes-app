@@ -86,7 +86,7 @@ export class HomeComponent implements OnInit {
     this.dialogService.confirmDialog(this.dialogRef).subscribe(newNote => {
       console.log(newNote);
       if (newNote !== false) {
-        this.notesService.addCategory(newNote).subscribe({
+        this.notesService.addFolder(newNote).subscribe({
           next: (res) => {
             this.notesService.findAllNotes().subscribe({
               next: (res) => {
