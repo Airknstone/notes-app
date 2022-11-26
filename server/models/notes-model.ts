@@ -4,7 +4,7 @@ import { Schema, model, Model, Types } from 'mongoose';
 export interface INoteItems {
   noteTitle: string,
   noteBody: { type: string, required: true; },
-  tags: string[];
+  tags: [ string ];
 }
 
 /* Document Definition */
