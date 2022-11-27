@@ -13,11 +13,7 @@ import { NotesService } from 'src/app/shared/services/notes-service/notes.servic
 export class ViewNotesComponent implements OnInit {
   noteId: string;
   notes!: Notes;
-  notesArray: {
-    title: string,
-    description: string;
-    tag: string;
-  }[] = [];
+
   constructor (private route: ActivatedRoute, private notesService: NotesService, private dialog: MatDialog) {
     this.noteId = this.route.snapshot.paramMap.get('noteId') as string;
 
@@ -25,15 +21,24 @@ export class ViewNotesComponent implements OnInit {
       next: (res) => {
         this.notes = res.data;
         console.log(this.notes);
+
       }
     });
 
   }
-  addNote(item: any) {
-    console.log(item);
-    this.notesArray.push(item);
-    console.log(this.notesArray);
+  addNote(data: any) {
+    console.log(data);
+    this.notesService.addNote(this.noteId, data).subscribe({
+      next: (res) => {
+        this.notesService.findCategoryById(this.noteId).subscribe({
+          next: (res) => {
+            this.notes = res.data;
+            console.log(this.notes);
 
+          }
+        });
+      }
+    });
   }
   openDialog() {
     const dialogRef = this.dialog.open(AddLinkDialogComponent, {

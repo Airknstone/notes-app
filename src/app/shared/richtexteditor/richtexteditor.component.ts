@@ -20,7 +20,7 @@ export class RichtexteditorComponent implements OnInit {
   });
   completeNote: Object = {};
 
-  selectedTag: string = '';
+
   tag: Tag[] = [
     { tag: 'Typescript' },
     { tag: 'JAva' },
@@ -39,9 +39,9 @@ export class RichtexteditorComponent implements OnInit {
 
   save(): void {
     this.completeNote = {
-      "title": this.noteSection.get('title')!.value,
-      "description": this.noteSection.get('control')!.value,
-      "tag": this.noteSection.get('tag')!.value
+      "noteTitle": this.noteSection.get('title')!.value,
+      "noteBody": this.noteSection.get('control')!.value,
+      "tags": this.noteSection.get('tag')!.value
     };
     console.log(this.completeNote);
     this.note.emit(this.completeNote);

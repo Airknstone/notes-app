@@ -26,7 +26,7 @@ export class DialogBoxComponent implements OnInit {
   }
   onclose() {
     const newData = {
-      category: this.addCategory.controls[ 'title' ].value,
+      folderName: this.addCategory.controls[ 'title' ].value,
       description: this.addCategory.controls[ 'message' ].value,
 
     };

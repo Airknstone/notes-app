@@ -15,8 +15,9 @@
           {{tag.tag}}
         </mat-option>
       </mat-select>
-    </mat-form-field>
 
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="save()">Save</button>
     <quill-editor formControlName="control" class="content-editor" (onEditorChanged)="changedEditor($event)"
       [styles]="{'min-height': '320px'}">
     </quill-editor>
@@ -24,5 +25,5 @@
   </form>
 
   <br> <br>
-  <button mat-raised-button color="primary" (click)="save()">Save</button>
+
 </div>

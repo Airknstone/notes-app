@@ -25,7 +25,7 @@ export class AddFolderComponent implements OnInit {
       _id: '',
       folderName: this.addFolder.controls[ 'folderName' ].value || "Folder Name from OnSubmit",
       description: this.addFolder.controls[ 'description' ].value || "Description from on submit",
-      note: []
+      notes: []
     };
 
     this.notesService.addFolder(newNote).subscribe({

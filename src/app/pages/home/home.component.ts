@@ -51,7 +51,7 @@ export class HomeComponent implements OnInit {
     this.notesService.findCategoryById(noteId).subscribe({
       next: (res) => {
         dialogEdit.header = "Editing Category";
-        dialogEdit.title = res.data.category;
+        dialogEdit.title = res.data.folderName;
         dialogEdit.message = res.data.description;
 
         this.dialogService.confirmDialog(dialogEdit).subscribe(newNote => {

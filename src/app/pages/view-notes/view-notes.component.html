@@ -6,35 +6,32 @@
 
   <br>
   <!--   <div [innerHTML]="htmlStr"></div> -->
-  <div *ngIf="notesArray.length > 0">
-    <div *ngFor="let notes of notesArray">
-      <h1> {{notes.title }}</h1>
-      <span style="background-color:rgb(0, 247, 255) ;"> {{notes.tag }}</span>
-      <div [innerHTML]="notes.description"></div>
+  <div class="notes-wrapper">
+    <div *ngIf="notes.notes">
+      <div *ngFor="let note of notes.notes">
+        <div class="note-title-container">
+          <h1 *ngIf="null !== note.noteTitle">{{note.noteTitle }}</h1>
+          <div *ngIf="note.tags" fxLayout="row" fxLayoutAlign="start center">
+            <mat-icon>arrow_right</mat-icon><b>Tags: </b>
+            <span>
+            </span> &nbsp;
+            <p class="tags" *ngFor="let tag of note.tags">{{tag}} </p>
+          </div>
+        </div>
+
+
+        <div [innerHTML]="note.noteBody"></div>
+      </div>
     </div>
-
-
   </div>
 
 
 
 
   <br>
-  <app-richtexteditor (note)="addNote($event)"></app-richtexteditor> <br>
+  <app-richtexteditor (note)="addNote($event)"></app-richtexteditor>
+  <br>
   <button mat-raised-button (click)="openDialog()" color="primary"> Add new Note</button>
-  <div fxLayout="row wrap">
-    <div *ngFor="let note of notes.note">
-      <mat-card class="note-card">
-        <p>{{note.noteTitle}}</p>
-        <p>{{note.noteBody}}</p>
 
-        <hr>
-
-        <mat-card-actions>
-          <button>add link</button>
-        </mat-card-actions>
-      </mat-card>
-    </div>
-  </div>
 </div> <br>
 <button mat-raised-button routerLink="/">Return Home</button>

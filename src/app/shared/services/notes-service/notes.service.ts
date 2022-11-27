@@ -16,11 +16,10 @@ export class NotesService {
   }
 
   setValue(newValue: any): void {
-    console.log(newValue);
+    console.log("Set Value from Notes Service");
     this._notesStream.next(newValue);
   }
   findAllNotes(): Observable<any> {
-    console.log('Running findAllNotes');
     return this.http.get<any>('/api/notes');
   }
 
@@ -34,19 +33,13 @@ export class NotesService {
     });
   }
   addNote(noteId: any, data: any): Observable<any> {
-    return this.http.put(`/api/notes/${noteId}/note`,
-      {
-        noteTitle: data.noteTitle,
-        noteBody: data.noteBody,
-        links: {
-          linkTitle: data.body.links.linkTitle,
-          linkHref: data.body.links.linkHref
-        }
-      });
+    console.log(noteId, data);
+    return this.http.post(`/api/notes/${noteId}/note`,
+      data);
   };
   updateCategory(noteId: any, data: any): Observable<any> {
     return this.http.put<any>(`/api/notes/${noteId}`, {
-      category: data.category,
+      folderName: data.folderName,
       description: data.description,
     });
   }

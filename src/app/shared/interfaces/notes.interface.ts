@@ -14,7 +14,7 @@ export interface Notes {
   _id: string,
   folderName: string,
   description: string,
-  note: INoteItems[];
+  notes: INoteItems[];
 }
 
 
