@@ -32,10 +32,10 @@ router.get('/', notesController.getNotesFolder);
 router.post('/', notesController.createNotesFolder);
 
 /* Update Folder  */
-router.put('/:noteId', notesController.updateNotesFolder);
+router.put('/:folderId', notesController.updateNotesFolder);
 
 /* Deletes a Folder and all its contents  */
-router.delete('/:noteId', notesController.deleteNotesFolder);
+router.delete('/:folderId', notesController.deleteNotesFolder);
 
 /* Delete multiple folders  */
 router.delete('/delete/:deleteArr', notesController.deleteMultipleFolders);
@@ -46,9 +46,12 @@ router.delete('/delete/:deleteArr', notesController.deleteMultipleFolders);
 *   BEGIN ROUTES WITHIN FOLDER
 */
 /* Get notes within Folder */
-router.get('/:noteId', notesController.getNotesFolderById);
+router.get('/:folderId', notesController.getNotesFolderById);
 
 /* add a new Note */
-router.post('/:noteId/note', notesController.addNewNote);
+router.post('/:folderId/note', notesController.addNewNote);
+
+/* Delete a note from Folder */
+router.delete('/:folderId/:noteId', notesController.deleteNoteFromFolder);
 
 module.exports = router;

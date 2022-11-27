@@ -36,8 +36,8 @@ export class AppComponent {
     });
 
   }
-  navigate(noteId: string) {
-    this.router.navigate([ `/view-notes/${noteId}` ]);
+  navigate(folderId: string) {
+    this.router.navigate([ `/view-notes/${folderId}` ]);
 
 
   }

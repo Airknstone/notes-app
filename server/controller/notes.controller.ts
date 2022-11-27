@@ -1,8 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import Notes, { INote, INoteItems } from '../models/notes-model';
-import { ErrorResponse } from '../utils/errorResponse';
 import { asyncHandler } from '../middleware/asyncHandler';
-
+const chalk = require('chalk');
 
 /* Gets all notes folder*/
 const getNotesFolder =
@@ -47,7 +46,7 @@ const createNotesFolder = asyncHandler(async (req: Request, res: Response, next:
 
 const updateNotesFolder = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
 
-  Notes.findOne({ _id: req.params[ 'noteId' ] }, function (err: any, note: any) {
+  Notes.findOne({ _id: req.params[ 'folderId' ] }, function (err: any, note: any) {
     if (err) {
       return next(err);
     }
@@ -78,7 +77,7 @@ const updateNotesFolder = asyncHandler(async (req: Request, res: Response, next:
 
 /* Deletes a Folder and all its contents */
 const deleteNotesFolder = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-  Notes.findByIdAndDelete({ _id: req.params[ 'noteId' ] }, function (err: any, folder: INote) {
+  Notes.findByIdAndDelete({ _id: req.params[ 'folderId' ] }, function (err: any, folder: INote) {
     if (err) {
       return next(err);
     } else {
@@ -115,13 +114,13 @@ const deleteMultipleFolders = asyncHandler(async (req: Request, res: Response, n
 
 /* Get notes within Folder */
 const getNotesFolderById = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-  Notes.findOne({ _id: req.params[ 'noteId' ] }, (err: unknown, note: INote) => {
+  Notes.findOne({ _id: req.params[ 'folderId' ] }, (err: unknown, note: INote) => {
     if (err) {
-/*       return next(new ErrorResponse(`Could not find Note with id ${req.params[ 'noteId' ]}`, 404));
+/*       return next(new ErrorResponse(`Could not find Note with id ${req.params[ 'folderId' ]}`, 404));
  */        return next(err);
     }
     else if (!note) {
-      /*       return next(new ErrorResponse(`Could not find Note with id ${req.params[ 'noteId' ]}`, 404)); */
+      /*       return next(new ErrorResponse(`Could not find Note with id ${req.params[ 'folderId' ]}`, 404)); */
       return next(err);
     }
     else {
@@ -140,7 +139,7 @@ const getNotesFolderById = asyncHandler(async (req: Request, res: Response, next
 */
 /* adds a new Note */
 const addNewNote = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-  Notes.findOne({ _id: req.params[ 'noteId' ] }, function (err: any, note: any) {
+  Notes.findOne({ _id: req.params[ 'folderId' ] }, function (err: any, note: any) {
     if (err) {
       return next(err);
 
@@ -166,7 +165,36 @@ const addNewNote = asyncHandler(async (req: Request, res: Response, next: NextFu
         else {
           res.json({
             httpCode: 200,
-            message: 'Successful Update of a Note',
+            message: 'Successful Addition of a Note',
+            data: note,
+          });
+        }
+      });
+    }
+  });
+});
+
+/* Deletes a note from note folder */
+const deleteNoteFromFolder = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+  Notes.findOne({ _id: req.params[ 'folderId' ] }, function (err: any, note: any) {
+    if (err) {
+      return next(err);
+    }
+    else if (!note) {
+      return next(err);
+    }
+    else {
+      const subNoteId = req.params[ 'noteId' ];
+      note.notes.id(subNoteId).remove();
+
+      note.save(function (err: any, note: INote) {
+        if (err) {
+          return next(err);
+        }
+        else {
+          res.json({
+            httpCode: 200,
+            message: 'Successful Delete of a Note',
             data: note,
           });
         }
@@ -184,5 +212,6 @@ module.exports = {
   deleteNotesFolder,
   updateNotesFolder,
   deleteMultipleFolders,
-  addNewNote
+  addNewNote,
+  deleteNoteFromFolder
 };

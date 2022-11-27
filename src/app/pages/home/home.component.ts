@@ -38,7 +38,7 @@ export class HomeComponent implements OnInit {
     this.adding = !this.adding;
     console.log(this.adding);
   }
-  editDialog(noteId: string) {
+  editDialog(folderId: string) {
     let dialogEdit = {
       header: 'Add a new Category',
       label1: 'Title',
@@ -48,7 +48,7 @@ export class HomeComponent implements OnInit {
       confirmText: 'Save',
       cancelText: 'Cancel',
     };
-    this.notesService.findCategoryById(noteId).subscribe({
+    this.notesService.findCategoryById(folderId).subscribe({
       next: (res) => {
         dialogEdit.header = "Editing Category";
         dialogEdit.title = res.data.folderName;
@@ -57,7 +57,7 @@ export class HomeComponent implements OnInit {
         this.dialogService.confirmDialog(dialogEdit).subscribe(newNote => {
           console.log(newNote);
           if (newNote !== false) {
-            this.notesService.updateCategory(noteId, newNote).subscribe({
+            this.notesService.updateCategory(folderId, newNote).subscribe({
               next: (res) => {
                 this.router.navigate([ '/' ]);
                 this.notesService.findAllNotes().subscribe({
@@ -102,21 +102,21 @@ export class HomeComponent implements OnInit {
       }
     });
   }
-  addSelected(noteId: string): void {
-    console.log('added to array' + noteId);
-    this.checked.push(noteId);
+  addSelected(folderId: string): void {
+    console.log('added to array' + folderId);
+    this.checked.push(folderId);
   }
-  removeSelected(noteId: string): void {
+  removeSelected(folderId: string): void {
     this.checked = this.checked.filter(id => {
-      return id !== noteId;
+      return id !== folderId;
     });
   }
-  changeEvent($event: any, noteId: string) {
+  changeEvent($event: any, folderId: string) {
     if ($event.checked === true) {
-      this.addSelected(noteId);
+      this.addSelected(folderId);
     }
     else {
-      this.removeSelected(noteId);
+      this.removeSelected(folderId);
     }
     $event.source.focus();
   }
@@ -139,14 +139,14 @@ export class HomeComponent implements OnInit {
   }
 
 
-  deleteNote(noteId: string): void {
-    console.log(noteId);
+  deleteNote(folderId: string): void {
+    console.log(folderId);
     /* Need to add Confirmation Dialogue  */
-    this.notesService.deleteNoteCategory(noteId).subscribe({
+    this.notesService.deleteNoteCategory(folderId).subscribe({
       next: (res) => {
 
-        console.log(`deleted ${noteId}`);
-        this.notes = this.notes.filter((note: any) => note._id !== noteId);
+        console.log(`deleted ${folderId}`);
+        this.notes = this.notes.filter((note: any) => note._id !== folderId);
         /* set value to update service variable */
         this.notesService.setValue(this.notes);
       },
@@ -154,7 +154,7 @@ export class HomeComponent implements OnInit {
         console.log(err);
       }
     });
-    this.removeSelected(noteId);
+    this.removeSelected(folderId);
   }
 
 

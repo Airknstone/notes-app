@@ -23,8 +23,8 @@ export class NotesService {
     return this.http.get<any>('/api/notes');
   }
 
-  findCategoryById(noteId: string): Observable<any> {
-    return this.http.get<any>(`/api/notes/${noteId}`);
+  findCategoryById(folderId: string): Observable<any> {
+    return this.http.get<any>(`/api/notes/${folderId}`);
   }
   addFolder(note: Notes): Observable<any> {
     return this.http.post<any>('/api/notes', {
@@ -32,19 +32,19 @@ export class NotesService {
       description: note.description,
     });
   }
-  addNote(noteId: any, data: any): Observable<any> {
-    console.log(noteId, data);
-    return this.http.post(`/api/notes/${noteId}/note`,
+  addNote(folderId: any, data: any): Observable<any> {
+    console.log(folderId, data);
+    return this.http.post(`/api/notes/${folderId}/note`,
       data);
   };
-  updateCategory(noteId: any, data: any): Observable<any> {
-    return this.http.put<any>(`/api/notes/${noteId}`, {
+  updateCategory(folderId: any, data: any): Observable<any> {
+    return this.http.put<any>(`/api/notes/${folderId}`, {
       folderName: data.folderName,
       description: data.description,
     });
   }
-  deleteNoteCategory(noteId: string): Observable<any> {
-    return this.http.delete<any>(`/api/notes/${noteId}`);
+  deleteNoteCategory(folderId: string): Observable<any> {
+    return this.http.delete<any>(`/api/notes/${folderId}`);
   }
 
   deleteArrayOfObjId(objIds: string): Observable<any> {
