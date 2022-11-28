@@ -40,6 +40,25 @@ export class ViewNotesComponent implements OnInit {
       }
     });
   }
+
+  deleteNote(folderId: string, noteId: string) {
+    console.log(folderId, noteId);
+    this.notesService.deleteNoteInsideFolder(folderId, noteId).subscribe({
+      next: (res) => {
+        this.notesService.findCategoryById(this.noteId).subscribe({
+          next: (res) => {
+            this.notes = res.data;
+            console.log(this.notes);
+
+          }
+        });
+      }
+    });
+  }
+
+
+
+
   openDialog() {
     const dialogRef = this.dialog.open(AddLinkDialogComponent, {
       width: '80vw',

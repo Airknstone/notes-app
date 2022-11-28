@@ -37,7 +37,7 @@ export class NotesService {
     return this.http.post(`/api/notes/${folderId}/note`,
       data);
   };
-  updateCategory(folderId: any, data: any): Observable<any> {
+  updateFolder(folderId: any, data: any): Observable<any> {
     return this.http.put<any>(`/api/notes/${folderId}`, {
       folderName: data.folderName,
       description: data.description,
@@ -51,4 +51,8 @@ export class NotesService {
     return this.http.delete<any>(`/api/notes/delete/${objIds}`);
   }
 
+
+  deleteNoteInsideFolder(folderId: string, noteId: string) {
+    return this.http.delete<any>(`/api/notes/${folderId}/${noteId}`);
+  }
 }

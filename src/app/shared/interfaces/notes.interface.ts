@@ -4,6 +4,7 @@ export interface ITag {
 }
 /* Subdocument definition */
 export interface INoteItems {
+  _id: string;
   noteTitle: string,
   noteBody: string,
   tags: ITag[];

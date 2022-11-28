@@ -8,19 +8,23 @@
   <!--   <div [innerHTML]="htmlStr"></div> -->
   <div class="notes-wrapper">
     <div *ngIf="notes.notes">
-      <div *ngFor="let note of notes.notes">
-        <div class="note-title-container">
-          <h1 *ngIf="null !== note.noteTitle">{{note.noteTitle }}</h1>
-          <div *ngIf="note.tags" fxLayout="row" fxLayoutAlign="start center">
-            <mat-icon>arrow_right</mat-icon><b>Tags: </b>
-            <span>
-            </span> &nbsp;
-            <p class="tags" *ngFor="let tag of note.tags">{{tag}} </p>
-          </div>
+
+      <div *ngFor="let note of notes.notes" fxLayout="row" fxLayoutAlign="start start">
+        <div class="menu" (click)="deleteNote(notes._id, note._id)">
+          <mat-icon>more_vert</mat-icon>
         </div>
-
-
-        <div [innerHTML]="note.noteBody"></div>
+        <div class="noteBody">
+          <div class="note-title-container">
+            <h1 *ngIf="null !== note.noteTitle">{{note.noteTitle }}</h1>
+            <div *ngIf="note.tags" fxLayout="row" fxLayoutAlign="start center">
+              <mat-icon>arrow_right</mat-icon><b>Tags: </b>
+              <span>
+              </span> &nbsp;
+              <p class="tags" *ngFor="let tag of note.tags">{{tag}} </p>
+            </div>
+          </div>
+          <div [innerHTML]="note.noteBody"></div>
+        </div>
       </div>
     </div>
   </div>

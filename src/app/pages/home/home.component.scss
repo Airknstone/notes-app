@@ -1,17 +1,19 @@
 .example-card {
-  width: 80%;
-  margin-bottom: 5px;
-  margin: auto;
+  margin-bottom: 35px;
+  box-shadow: none;
 }
 .note-card-container {
-  padding: 2rem;
+  padding: 1rem;
 }
 .delete-button,
 .menu {
   display: flex;
-  justify-content: end;
+  justify-content: space-between;
 }
 #delete {
   color: red;
   display: block;
+}
+.clickable:hover {
+  cursor: pointer;
 }
