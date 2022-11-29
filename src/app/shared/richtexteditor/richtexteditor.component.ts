@@ -15,7 +15,7 @@ interface Tag {
 export class RichtexteditorComponent implements OnInit {
   noteSection = new FormGroup({
     title: new FormControl(''),
-    control: new FormControl(''),
+    control: new FormControl('', [ Validators.required ]),
     tag: new FormControl('')
   });
   completeNote: Object = {};

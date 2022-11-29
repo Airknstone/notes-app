@@ -1,8 +1,7 @@
-import { MatDialog } from '@angular/material/dialog';
+
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Notes } from 'src/app/shared/interfaces/notes.interface';
-import { AddLinkDialogComponent } from '../add-link-dialog/add-link-dialog.component';
 import { NotesService } from 'src/app/shared/services/notes-service/notes.service';
 
 @Component({
@@ -11,13 +10,13 @@ import { NotesService } from 'src/app/shared/services/notes-service/notes.servic
   styleUrls: [ './view-notes.component.scss' ]
 })
 export class ViewNotesComponent implements OnInit {
-  noteId: string;
+  foldersId: string;
   notes!: Notes;
 
-  constructor (private route: ActivatedRoute, private notesService: NotesService, private dialog: MatDialog) {
-    this.noteId = this.route.snapshot.paramMap.get('noteId') as string;
+  constructor (private route: ActivatedRoute, private notesService: NotesService) {
+    this.foldersId = this.route.snapshot.paramMap.get('noteId') as string;
 
-    this.notesService.findFolderById(this.noteId).subscribe({
+    this.notesService.findFolderById(this.foldersId).subscribe({
       next: (res) => {
         this.notes = res.data;
         console.log(this.notes);
@@ -26,26 +25,12 @@ export class ViewNotesComponent implements OnInit {
     });
 
   }
-  addNote(data: any) {
-    console.log(data);
-    this.notesService.addNote(this.noteId, data).subscribe({
-      next: (res) => {
-        this.notesService.findFolderById(this.noteId).subscribe({
-          next: (res) => {
-            this.notes = res.data;
-            console.log(this.notes);
-
-          }
-        });
-      }
-    });
-  }
-
+  /* TODO CREATE FUNCTION TO RE RENDER / RE call API and create DOUBLE BIND to TOOLS */
   deleteNote(folderId: string, noteId: string) {
     console.log(folderId, noteId);
     this.notesService.deleteNoteInsideFolder(folderId, noteId).subscribe({
       next: (res) => {
-        this.notesService.findFolderById(this.noteId).subscribe({
+        this.notesService.findFolderById(this.foldersId).subscribe({
           next: (res) => {
             this.notes = res.data;
             console.log(this.notes);
@@ -59,16 +44,6 @@ export class ViewNotesComponent implements OnInit {
     document.getElementById(elementId)?.scrollIntoView({ behavior: 'smooth' });
   }
 
-
-
-  openDialog() {
-    const dialogRef = this.dialog.open(AddLinkDialogComponent, {
-      width: '80vw',
-      height: '95vh',
-      disableClose: true,
-
-    });
-  }
   ngOnInit(): void {
   }
 

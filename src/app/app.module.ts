@@ -34,6 +34,7 @@ import { TextFieldModule } from '@angular/cdk/text-field';
 import { AddLinkDialogComponent } from './pages/add-link-dialog/add-link-dialog.component';
 import { RichtexteditorComponent } from './shared/richtexteditor/richtexteditor.component';
 import { ToolsComponent } from './pages/view-notes/tools/tools.component';
+import { EditNotesComponent } from './pages/view-notes/edit-notes/edit-notes.component';
 
 
 
@@ -47,6 +48,7 @@ import { ToolsComponent } from './pages/view-notes/tools/tools.component';
     AddLinkDialogComponent,
     RichtexteditorComponent,
     ToolsComponent,
+    EditNotesComponent,
 
   ],
   imports: [

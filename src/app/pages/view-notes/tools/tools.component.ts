@@ -1,5 +1,10 @@
 import { Component, Input, OnInit, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { INoteItems, Notes } from 'src/app/shared/interfaces/notes.interface';
+import { MatDialog } from '@angular/material/dialog';
+import { AddLinkDialogComponent } from '../../add-link-dialog/add-link-dialog.component';
+
+
+
 
 @Component({
   selector: 'app-tools',
@@ -9,8 +14,13 @@ import { INoteItems, Notes } from 'src/app/shared/interfaces/notes.interface';
 export class ToolsComponent implements OnChanges {
   @Input() notesList = {} as INoteItems[];
   @Output() noteTitleId = new EventEmitter<string>();
+
+  @Output() showEditorChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Input() showEditor!: boolean;
   filteredNoteList = {} as INoteItems[];
-  constructor () {
+
+  @Input() folder!: Notes;
+  constructor (private dialog: MatDialog) {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -22,5 +32,19 @@ export class ToolsComponent implements OnChanges {
   }
   onClickScroll(elementId: string): void {
     this.noteTitleId.emit(elementId);
+  }
+  openDialog() {
+
+    const dialogRef = this.dialog.open(AddLinkDialogComponent, {
+      width: '80vw',
+      height: '95vh',
+      disableClose: true,
+      data: this.folder
+    });
+  }
+  showEditorFunc() {
+    this.showEditor = !this.showEditor;
+    this.showEditorChange.emit(this.showEditor);
+
   }
 }

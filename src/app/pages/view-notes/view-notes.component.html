@@ -3,19 +3,29 @@
 
     <h1>{{notes.folderName}}</h1>
     <h3>{{notes.description}}</h3>
-
     <!--   <div [innerHTML]="htmlStr"></div> -->
     <div class="notes-wrapper">
       <div *ngIf="notes.notes">
-
         <div class="note-container" *ngFor="let note of notes.notes" fxLayout="row" fxLayoutAlign="start start">
-          <div>
-            <mat-icon class="menu" (click)="deleteNote(notes._id, note._id)">more_vert</mat-icon>
-            <br> <br> <br>
-            <mat-icon class="move">apps</mat-icon>
+          <div class="menu">
+            <div>
+              <span mat-icon-button [matMenuTriggerFor]="menu">
+                <mat-icon>more_vert</mat-icon>
+              </span>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item>
+                  <mat-icon>dialpad</mat-icon>
+                  <span>Edit</span>
+                </button>
+                <button mat-menu-item (click)="deleteNote(notes._id, note._id)">
+                  <mat-icon>delete_sweep</mat-icon>
+                  <span>Delete</span>
+                </button>
+              </mat-menu>
+            </div>
+            <br>
+            <mat-icon class="move">view_array</mat-icon>
           </div>
-
-
           <div class="noteBody">
             <div class="note-title-container">
               <h1 id="{{note._id}}" *ngIf="null !== note.noteTitle">{{note.noteTitle }}</h1>
@@ -32,16 +42,11 @@
       </div>
     </div>
 
-    <br>
-
-    <app-richtexteditor (note)="addNote($event)"></app-richtexteditor>
-    <br>
-    <button mat-raised-button (click)="openDialog()" color="primary"> Add new Note</button>
-
   </div>
 
   <div class="tools" fxFlex="10" fxHide fxShow.gt-md>
-    <app-tools *ngIf="notes" [notesList]="notes.notes" (noteTitleId)="onClickScroll($event)"></app-tools>
+    <app-tools *ngIf="notes" [notesList]="notes.notes" [folder]="notes" (noteTitleId)="onClickScroll($event)">
+    </app-tools>
 
   </div>
 

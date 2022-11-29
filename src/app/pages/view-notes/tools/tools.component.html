@@ -1,9 +1,10 @@
 <div fxLayout="column">
+  <button mat-raised-button routerLink="/">Return Home</button>
+  <button mat-raised-button (click)="openDialog()" color="primary"> Add new Note</button>
+
+
   <ul *ngIf="filteredNoteList">
     <li *ngFor="let note of filteredNoteList" (click)="onClickScroll(note._id)">{{note.noteTitle}}</li>
   </ul>
-
-
-  <button mat-raised-button routerLink="/">Return Home</button>
 
 </div>

@@ -1,29 +1,33 @@
 <div class="container">
 
   <form [formGroup]="noteSection">
-    <mat-form-field appearance="outline">
-      <mat-label>Title: </mat-label>
-      <input class="input-text" matInput type="text" formControlName="title" maxlength="80">
-      <mat-error class="error" *ngIf="noteSection.controls['title'].invalid">
-        Please Enter a Title- Cannot be Empty.
-      </mat-error>
-    </mat-form-field>
-    <mat-form-field appearance="outline">
-      <mat-label>Tag: </mat-label>
-      <mat-select formControlName="tag" name="tag">
-        <mat-option *ngFor="let tag of tag" [value]="tag.tag">
-          {{tag.tag}}
-        </mat-option>
-      </mat-select>
+    <div class="tool-bar" fxLayout="row" fxLayoutAlign="space-evenly stretch">
+      <mat-form-field appearance="legacy" class="input-text">
+        <mat-label>Title: </mat-label>
+        <input matInput type="text" formControlName="title" maxlength="80">
+      </mat-form-field> &nbsp;
+      <mat-form-field appearance="legacy" class="input-tags">
+        <mat-label>Tag: </mat-label>
+        <mat-select formControlName="tag" name="tag">
+          <mat-option *ngFor="let tag of tag" [value]="tag.tag">
+            {{tag.tag}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div>
+        <button mat-raised-button color="primary">create tag</button>
+        &nbsp;
+        <button mat-raised-button color="primary" [disabled]="!noteSection.valid" (click)="save()">Save</button>
+      </div>
+    </div>
 
-    </mat-form-field>
-    <button mat-raised-button color="primary" (click)="save()">Save</button>
+
     <quill-editor formControlName="control" class="content-editor" (onEditorChanged)="changedEditor($event)"
       [styles]="{'min-height': '320px'}">
     </quill-editor>
 
   </form>
 
-  <br> <br>
+  <br>
 
 </div>

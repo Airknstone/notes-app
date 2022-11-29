@@ -33,8 +33,8 @@
   margin-top: 50px;
 
   > * {
-    font-size: 18px;
-    line-height: 30px;
+    font-size: 14px;
+    line-height: 20px;
   }
   span {
     font-size: 14px;
@@ -46,10 +46,11 @@
 }
 .move {
   cursor: move;
+  font-size: 14px;
 }
 .tools {
   position: sticky;
-  top: 0;
+  top: 35px;
   right: 0;
   height: 100px;
   width: 100px;
