@@ -23,7 +23,7 @@
 
 
     <quill-editor formControlName="control" class="content-editor" (onEditorChanged)="changedEditor($event)"
-      [styles]="{'min-height': '380px', 'border':'none'}">
+      [styles]="editorStyle" [modules]="config">
     </quill-editor>
 
   </form>

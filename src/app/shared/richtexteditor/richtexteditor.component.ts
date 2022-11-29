@@ -7,12 +7,42 @@ interface Tag {
   tag: string;
 }
 
+
+
 @Component({
   selector: 'app-richtexteditor',
   templateUrl: './richtexteditor.component.html',
   styleUrls: [ './richtexteditor.component.scss' ]
 })
 export class RichtexteditorComponent implements OnInit {
+  editorStyle = {
+    'min-height': '380px',
+    'border': 'none',
+    'padding': '0rem 5rem'
+  };
+
+  config = {
+
+    toolbar: [
+      [ 'bold', 'italic', 'underline', 'strike' ],        // toggled buttons
+      [ 'blockquote', 'code-block' ],
+
+      [ { 'header': 1 }, { 'header': 2 } ],               // custom button values
+      [ { 'list': 'ordered' }, { 'list': 'bullet' } ],
+      [ { 'script': 'sub' }, { 'script': 'super' } ],      // superscript/subscript
+      [ { 'indent': '-1' }, { 'indent': '+1' } ],          // outdent/indent
+      [ 'direction', { 'align': [] } ],
+      [ 'link', 'image', 'video', 'formula' ],                      // text direction
+      [ { 'header': [ 1, 2, 3, 4, 5, 6, false ] } ],
+
+      [ { 'color': [] }, { 'background': [] } ],          // dropdown with defaults from theme
+      [ { 'font': [] } ],
+      [ { 'align': [] } ],
+
+      [ 'clean' ]                                         // remove formatting button
+    ]
+  };
+
   noteSection = new FormGroup({
     title: new FormControl(''),
     control: new FormControl('', [ Validators.required ]),

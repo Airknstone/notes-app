@@ -174,6 +174,38 @@ const addNewNote = asyncHandler(async (req: Request, res: Response, next: NextFu
   });
 });
 
+/* Updates a note Within a Folder */
+const updatesANoteWithinFolder = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+  Notes.findOne({ _id: req.params[ 'folderId' ] }, function (err: any, note: any) {
+    if (err) {
+      return next(err);
+    }
+    else if (!note) {
+      return next(err);
+    }
+    else {
+      const subNoteId = req.params[ 'noteId' ];
+      console.log(subNoteId);
+      note.notes.id(subNoteId).noteTitle = req.body.noteTitle || null;
+      note.notes.id(subNoteId).noteBody = req.body.noteBody;
+      note.notes.id(subNoteId).tags = req.body.tags || null;
+
+      note.save(function (err: any, note: INote) {
+        if (err) {
+          return next(err);
+        }
+        else {
+          res.json({
+            httpCode: 200,
+            message: 'Successful update of a Note',
+            data: note,
+          });
+        }
+      });
+    }
+  });
+});
+
 /* Deletes a note from note folder */
 const deleteNoteFromFolder = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
   Notes.findOne({ _id: req.params[ 'folderId' ] }, function (err: any, note: any) {
@@ -213,5 +245,6 @@ module.exports = {
   updateNotesFolder,
   deleteMultipleFolders,
   addNewNote,
+  updatesANoteWithinFolder,
   deleteNoteFromFolder
 };

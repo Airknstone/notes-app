@@ -51,6 +51,9 @@ router.get('/:folderId', notesController.getNotesFolderById);
 /* add a new Note */
 router.post('/:folderId/note', notesController.addNewNote);
 
+/* Updates a note Within a Folder */
+router.put('/:folderId/:noteId', notesController.updatesANoteWithinFolder);
+
 /* Delete a note from Folder */
 router.delete('/:folderId/:noteId', notesController.deleteNoteFromFolder);
 

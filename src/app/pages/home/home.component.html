@@ -37,11 +37,11 @@
         </mat-menu>
         <br>
         <div class="clickable" routerLink="/view-notes/{{note._id}}">
-          <mat-card-title>{{note.folderName}}</mat-card-title>
+          <mat-card-title class="title-clamp">{{note.folderName}}</mat-card-title>
 
           <mat-card-content>
             <p>
-              <mat-card-subtitle>{{note.description}}</mat-card-subtitle>
+              <mat-card-subtitle class="line-clamp">{{note.description}}</mat-card-subtitle>
             </p>
 
           </mat-card-content>
