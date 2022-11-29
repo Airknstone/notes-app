@@ -33,6 +33,8 @@ import { DialogBoxComponent } from './shared/dialog-box/dialog-box.component';
 import { TextFieldModule } from '@angular/cdk/text-field';
 import { AddLinkDialogComponent } from './pages/add-link-dialog/add-link-dialog.component';
 import { RichtexteditorComponent } from './shared/richtexteditor/richtexteditor.component';
+import { ToolsComponent } from './pages/view-notes/tools/tools.component';
+
 
 
 @NgModule({
@@ -43,7 +45,9 @@ import { RichtexteditorComponent } from './shared/richtexteditor/richtexteditor.
     ViewNotesComponent,
     DialogBoxComponent,
     AddLinkDialogComponent,
-    RichtexteditorComponent
+    RichtexteditorComponent,
+    ToolsComponent,
+
   ],
   imports: [
     BrowserModule,

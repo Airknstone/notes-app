@@ -1,12 +1,14 @@
 <div fxFlex fxLayoutGap="40px">
 
-  <button mat-raised-button color="primary" routerLink="/add-category">Add New Category</button>
-  <button mat-raised-button color="primary" (click)="openDialog()">Dialog</button>
-  <input type="file" onchange="console.log(event.target.files)">
-  <button *ngIf="checked.length > 0" mat-raised-button color="warn" (click)="deleteGroup()">Delete Group</button>
-  <br> <br>
-  <h1>Welcome</h1>
-  <br>
+  <div class="heading">
+    <button mat-raised-button color="primary" routerLink="/add-category">Add New Category</button>
+    <button mat-raised-button color="primary" (click)="openDialog()">Dialog</button>
+    <input type="file" onchange="console.log(event.target.files)">
+    <button *ngIf="checked.length > 0" mat-raised-button color="warn" (click)="deleteGroup()">Delete Group</button>
+    <br> <br>
+    <h1>Welcome</h1>
+    <br>
+  </div>
   <div *ngIf="notes">
     <div class="note-card-container" fxLayout="row wrap" fxLayoutGap="50px">
       <mat-card *ngFor="let note of notes" class="example-card" id="{{note._id}}" fxFlex="45">

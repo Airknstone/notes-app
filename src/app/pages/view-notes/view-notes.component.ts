@@ -55,7 +55,9 @@ export class ViewNotesComponent implements OnInit {
       }
     });
   }
-
+  onClickScroll(elementId: any) {
+    document.getElementById(elementId)?.scrollIntoView({ behavior: 'smooth' });
+  }
 
 
 

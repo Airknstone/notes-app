@@ -31,7 +31,7 @@ html {
   background: rgba(2, 131, 110, 0.836);
 }
 .sidenav-content {
-  padding: 5rem 3rem;
+  padding: 2rem 3rem 5rem 1rem;
 }
 .example-header {
   position: fixed;
@@ -52,10 +52,4 @@ html {
 }
 .navigate-button {
   padding: 3px;
-}
-
-.tools {
-  position: sticky;
-  top: 0;
-  right: 0;
 }

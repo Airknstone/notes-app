@@ -1,41 +1,50 @@
-<div class="note-card-container" *ngIf="notes" fxLayout="column">
+<div>
+  <div class="note-card-container" *ngIf="notes" fxLayout="column" fxFlex="90">
 
-  {{notes._id}}
-  <h2>{{notes.folderName}}</h2>
-  <p>{{notes.description}}</p>
+    {{notes._id}}
+    <h1>{{notes.folderName}}</h1>
+    <h3>{{notes.description}}</h3>
 
-  <br>
-  <!--   <div [innerHTML]="htmlStr"></div> -->
-  <div class="notes-wrapper">
-    <div *ngIf="notes.notes">
+    <br>
+    <!--   <div [innerHTML]="htmlStr"></div> -->
+    <div class="notes-wrapper">
+      <div *ngIf="notes.notes">
 
-      <div *ngFor="let note of notes.notes" fxLayout="row" fxLayoutAlign="start start">
-        <div class="menu" (click)="deleteNote(notes._id, note._id)">
-          <mat-icon>more_vert</mat-icon>
-        </div>
-        <div class="noteBody">
-          <div class="note-title-container">
-            <h1 *ngIf="null !== note.noteTitle">{{note.noteTitle }}</h1>
-            <div *ngIf="note.tags" fxLayout="row" fxLayoutAlign="start center">
-              <mat-icon>arrow_right</mat-icon><b>Tags: </b>
-              <span>
-              </span> &nbsp;
-              <p class="tags" *ngFor="let tag of note.tags">{{tag}} </p>
-            </div>
+        <div class="note-container" *ngFor="let note of notes.notes" fxLayout="row" fxLayoutAlign="start start">
+          <div>
+            <mat-icon class="menu" (click)="deleteNote(notes._id, note._id)">more_vert</mat-icon>
+            <br> <br> <br>
+            <mat-icon class="move">apps</mat-icon>
           </div>
-          <div [innerHTML]="note.noteBody"></div>
+
+
+          <div class="noteBody">
+            <div class="note-title-container">
+              <h1 id="{{note._id}}" *ngIf="null !== note.noteTitle">{{note.noteTitle }}</h1>
+              <div *ngIf="note.tags" fxLayout="row" fxLayoutAlign="start center">
+                <mat-icon>arrow_right</mat-icon><b>Tags: </b>
+                <span>
+                </span> &nbsp;
+                <p class="tags" *ngFor="let tag of note.tags">{{tag}} </p>
+              </div>
+            </div>
+            <div [innerHTML]="note.noteBody"></div>
+          </div>
         </div>
       </div>
     </div>
+
+    <br>
+
+    <app-richtexteditor (note)="addNote($event)"></app-richtexteditor>
+    <br>
+    <button mat-raised-button (click)="openDialog()" color="primary"> Add new Note</button>
+
   </div>
 
+  <div class="tools" fxFlex="10" fxHide fxShow.gt-md>
+    <app-tools *ngIf="notes" [notesList]="notes.notes" (noteTitleId)="onClickScroll($event)"></app-tools>
 
+  </div>
 
-
-  <br>
-  <app-richtexteditor (note)="addNote($event)"></app-richtexteditor>
-  <br>
-  <button mat-raised-button (click)="openDialog()" color="primary"> Add new Note</button>
-
-</div> <br>
-<button mat-raised-button routerLink="/">Return Home</button>
+</div>

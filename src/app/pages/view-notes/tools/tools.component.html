@@ -1,0 +1,9 @@
+<div fxLayout="column">
+  <ul *ngIf="filteredNoteList">
+    <li *ngFor="let note of filteredNoteList" (click)="onClickScroll(note._id)">{{note.noteTitle}}</li>
+  </ul>
+
+
+  <button mat-raised-button routerLink="/">Return Home</button>
+
+</div>

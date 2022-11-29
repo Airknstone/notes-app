@@ -27,19 +27,14 @@ export class AppComponent {
       console.log(val);
       this.notes = val;
     });
-
   }
   onClickScroll(elementId: string): void {
     /* Doesnt scroll to element in one click */
     this.router.navigate([ '/' ]).then(() => {
       document.getElementById(elementId)?.scrollIntoView({ behavior: 'smooth' });
     });
-
   }
   navigate(folderId: string) {
     this.router.navigate([ `/view-notes/${folderId}` ]);
-
-
   }
-
 }
