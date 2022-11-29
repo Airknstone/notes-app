@@ -9,9 +9,9 @@
       <ul>
         <li *ngFor="let note of notes" fxLayoutAlign="center center">
           <button mat-button class="navigate-button" (click)="navigate(note._id)">
-            <mat-icon class="launch-icon">note</mat-icon> &nbsp;&nbsp;
+            <mat-icon class="launch-icon">folder_open</mat-icon>
           </button>
-          <span (click)="onClickScroll(note._id)">{{note.folderName}}</span>
+          <div class="folderName" (click)="onClickScroll(note._id)">{{note.folderName}}</div>
 
         </li>
       </ul>

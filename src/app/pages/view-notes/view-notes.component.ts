@@ -16,27 +16,22 @@ export class ViewNotesComponent implements OnInit {
   constructor (private route: ActivatedRoute, private notesService: NotesService) {
     this.foldersId = this.route.snapshot.paramMap.get('noteId') as string;
 
+    this.getFolderById();
+  }
+  /* TODO CREATE FUNCTION TO RE RENDER / RE call API and create DOUBLE BIND to TOOLS */
+  getFolderById() {
     this.notesService.findFolderById(this.foldersId).subscribe({
       next: (res) => {
         this.notes = res.data;
         console.log(this.notes);
-
       }
     });
-
   }
-  /* TODO CREATE FUNCTION TO RE RENDER / RE call API and create DOUBLE BIND to TOOLS */
   deleteNote(folderId: string, noteId: string) {
     console.log(folderId, noteId);
     this.notesService.deleteNoteInsideFolder(folderId, noteId).subscribe({
       next: (res) => {
-        this.notesService.findFolderById(this.foldersId).subscribe({
-          next: (res) => {
-            this.notes = res.data;
-            console.log(this.notes);
-
-          }
-        });
+        this.getFolderById();
       }
     });
   }

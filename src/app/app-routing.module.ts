@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AddFolderComponent } from './pages/add-folder/add-folder.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ViewNotesComponent } from './pages/view-notes/view-notes.component';
 
@@ -9,10 +8,6 @@ const routes: Routes = [
     path: '',
     component: HomeComponent,
 
-  },
-  {
-    path: 'add-category',
-    component: AddFolderComponent
   },
   {
     path: 'view-notes/:noteId',

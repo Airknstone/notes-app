@@ -16,8 +16,8 @@ export class ConfirmDialogService {
     return this.dialog.open(
       DialogBoxComponent, {
       data,
-      width: '80vw',
-      height: '95vh',
+      width: '60vw',
+      height: '78vh',
       disableClose: true,
     }
     ).afterClosed();

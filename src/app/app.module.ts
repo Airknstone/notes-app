@@ -23,7 +23,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { AddFolderComponent } from './pages/add-folder/add-folder.component';
+
 import { ViewNotesComponent } from './pages/view-notes/view-notes.component';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
@@ -35,6 +35,8 @@ import { AddLinkDialogComponent } from './pages/add-link-dialog/add-link-dialog.
 import { RichtexteditorComponent } from './shared/richtexteditor/richtexteditor.component';
 import { ToolsComponent } from './pages/view-notes/tools/tools.component';
 import { EditNotesComponent } from './pages/view-notes/edit-notes/edit-notes.component';
+import { MatChipsModule } from '@angular/material/chips';
+
 
 
 
@@ -42,7 +44,7 @@ import { EditNotesComponent } from './pages/view-notes/edit-notes/edit-notes.com
   declarations: [
     AppComponent,
     HomeComponent,
-    AddFolderComponent,
+
     ViewNotesComponent,
     DialogBoxComponent,
     AddLinkDialogComponent,
@@ -73,7 +75,8 @@ import { EditNotesComponent } from './pages/view-notes/edit-notes/edit-notes.com
     MatMenuModule,
     MatListModule,
     TextFieldModule,
-    QuillModule
+    QuillModule,
+    MatChipsModule
   ],
   providers: [],
   bootstrap: [ AppComponent ]

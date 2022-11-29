@@ -1,20 +1,20 @@
 <form [formGroup]="addCategory">
   <div fxLayout="column">
-    <h1>{{data.header}}</h1>
-
     <div fxLayout="row" fxLayoutAlign="space-between center">
-      <p>{{data.title}}</p> <button [mat-dialog-close]="false">
+      <h1 class="header">{{data.header}}</h1>
+      <button [mat-dialog-close]="false">
         <mat-icon>close</mat-icon>
       </button>
     </div>
-    <mat-form-field appearance="outline">
+
+    <mat-form-field appearance="legacy">
       <mat-label>{{data.label1}} </mat-label>
       <input class="input-text" matInput type="text" [formControl]="addCategory.controls['title']" maxlength="80">
       <mat-error class="error" *ngIf="addCategory.controls['title'].invalid">
         Please Enter a Title- Cannot be Empty.
       </mat-error>
     </mat-form-field>
-
+    <br>
     <mat-form-field appearance="outline">
       <mat-label>{{data.label2}}</mat-label>
       <textarea class="input-text text-area" matInput type="text" cdkTextareaAutosize

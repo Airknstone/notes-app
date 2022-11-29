@@ -1,26 +1,35 @@
 <div fxFlex fxLayoutGap="40px">
 
-  <div class="heading">
-    <button mat-raised-button color="primary" routerLink="/add-category">Add New Category</button>
-    <button mat-raised-button color="primary" (click)="openDialog()">Dialog</button>
-    <input type="file" onchange="console.log(event.target.files)">
+  <div class="heading" fxLayoutAlign="end start">
     <button *ngIf="checked.length > 0" mat-raised-button color="warn" (click)="deleteGroup()">Delete Group</button>
-    <br> <br>
-    <h1>Welcome</h1>
-    <br>
-  </div>
+    <button mat-raised-button color="primary" (click)="openDialog()">Add new Folder</button>
+    <input type="file" onchange="console.log(event.target.files)">
+
+
+  </div> <br>
+
+
+  <h1 class="heading">Welcome</h1>
   <div *ngIf="notes">
     <div class="note-card-container" fxLayout="row wrap" fxLayoutGap="50px">
       <mat-card *ngFor="let note of notes" class="example-card" id="{{note._id}}" fxFlex="45">
-        <div class="menu">
-          <mat-checkbox #{{note._id}} (change)="changeEvent($event, note._id)">Select </mat-checkbox>
+        <div fxLayout="row " fxLayoutAlign="space-between center">
+          <mat-checkbox #{{note._id}} (change)="changeEvent($event, note._id)">Select</mat-checkbox>
+
+          <mat-chip-list aria-label="notes-info">
+            <mat-chip class="chips">Notes: {{note.notes.length}}</mat-chip>
+            <!--             <mat-chip>Two fish</mat-chip>
+            <mat-chip color="primary" selected>Primary fish</mat-chip>
+            <mat-chip color="accent" selected>Accent fish</mat-chip> -->
+          </mat-chip-list>
           <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Category Card Options">
             <mat-icon>more_vert</mat-icon>
           </button>
         </div>
+
         <mat-menu #menu="matMenu">
           <button mat-button (click)="editDialog(note._id)">
-            <mat-icon>edit</mat-icon> Edit
+            <mat-icon>title</mat-icon> Rename
           </button>
           <button id="delete" mat-button (click)="deleteNote(note._id)">
             <mat-icon>delete</mat-icon> Delete
@@ -34,14 +43,12 @@
             <p>
               <mat-card-subtitle>{{note.description}}</mat-card-subtitle>
             </p>
-            <br>
+
           </mat-card-content>
         </div>
         <mat-card-actions fxLayout="row" fxLayoutAlign="end center">
 
-          <div>
-            <button mat-flat-button color="primary" routerLink="/view-notes/{{note._id}}">View Notes</button>
-          </div>
+
         </mat-card-actions>
       </mat-card>
     </div>

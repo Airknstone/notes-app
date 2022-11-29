@@ -1,22 +1,28 @@
 .example-card {
   margin-bottom: 35px;
+  height: 200px;
+  overflow: hidden;
   box-shadow: none;
 }
 .note-card-container {
   padding: 1rem;
 }
-.delete-button,
-.menu {
-  display: flex;
-  justify-content: space-between;
-}
+
 #delete {
   color: red;
   display: block;
 }
 .clickable:hover {
   cursor: pointer;
+  color: rgb(86, 172, 201);
+  text-decoration: underline;
 }
 .heading {
   padding: 0 1rem;
+  button {
+    margin-right: 10px;
+  }
+}
+.chips {
+  font-size: 12px;
 }

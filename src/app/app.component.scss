@@ -12,12 +12,12 @@ html {
 
   ul {
     padding-left: 0rem;
-    margin-left: 1rem;
+    margin-left: 0.8rem;
     border-left: 1px solid white;
     li {
       place-content: start !important;
       list-style: none;
-      margin: 5px 0;
+      margin: 0px 0;
       color: rgb(234, 234, 234);
     }
   }
@@ -52,4 +52,18 @@ html {
 }
 .navigate-button {
   padding: 3px;
+  min-width: 35px !important;
+  &:hover {
+    background-color: rgba(194, 194, 194, 0.575);
+  }
+}
+.folderName {
+  vertical-align: middle;
+  width: 100%;
+  padding: 5px 4px;
+  min-height: 30px;
+  &:hover {
+    cursor: pointer;
+    background-color: rgba(194, 194, 194, 0.575);
+  }
 }

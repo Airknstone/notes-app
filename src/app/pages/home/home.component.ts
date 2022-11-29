@@ -49,7 +49,7 @@ export class HomeComponent implements OnInit {
     };
     this.notesService.findFolderById(folderId).subscribe({
       next: (res) => {
-        dialogEdit.header = "Editing Folder";
+        dialogEdit.header = "Editing Folder Name and Description";
         dialogEdit.title = res.data.folderName;
         dialogEdit.message = res.data.description;
         dialogEdit.notes = res.data.notes;
