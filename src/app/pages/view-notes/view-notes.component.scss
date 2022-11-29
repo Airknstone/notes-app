@@ -25,19 +25,17 @@
 
     font-size: 2rem;
     font-weight: 900;
-    padding: 0rem 5rem 1rem 0;
+    padding: 0rem 0rem 1rem 0;
   }
 }
 .notes-wrapper {
   /*   font-family: Georgia, 'Times New Roman', Times, serif; */
-  margin-top: 50px;
+  margin-top: 40px;
 
   > * {
-    font-size: 14px;
+    font-size: 15px;
     line-height: 20px;
-  }
-  span {
-    font-size: 14px;
+    word-break: break-word;
   }
 }
 .menu {

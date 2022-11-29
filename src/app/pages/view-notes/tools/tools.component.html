@@ -1,10 +1,19 @@
 <div fxLayout="column">
-  <button mat-raised-button routerLink="/">Return Home</button>
-  <button mat-raised-button (click)="openDialog()" color="primary"> Add new Note</button>
+  <mat-menu #toolMenu="matMenu">
+    <ng-template matMenuContent>
+      <button mat-menu-item (click)="openDialog()" color="primary"> Add new Note</button>
+      <button mat-menu-item routerLink="/">Return Home</button>
+    </ng-template>
+  </mat-menu>
 
-
-  <ul *ngIf="filteredNoteList">
-    <li *ngFor="let note of filteredNoteList" (click)="onClickScroll(note._id)">{{note.noteTitle}}</li>
-  </ul>
-
+  <button mat-icon-button [matMenuTriggerFor]="toolMenu">
+    <mat-icon>dashboard</mat-icon> Tools
+  </button>
+  <br>
+  <div *ngIf="filteredNoteList">
+    <div class="notes-header">Notes Titles</div>
+    <ul class="note-titles">
+      <li *ngFor="let note of filteredNoteList" (click)="onClickScroll(note._id)">{{note.noteTitle}}</li>
+    </ul>
+  </div>
 </div>

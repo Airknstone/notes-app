@@ -1,0 +1,11 @@
+.note-titles {
+  padding-left: 20px;
+  li {
+    font-size: 12px;
+    list-style: circle;
+    &:hover {
+      cursor: pointer;
+      background-color: lightgray;
+    }
+  }
+}

@@ -45,7 +45,8 @@
   </div>
 
   <div class="tools" fxFlex="10" fxHide fxShow.gt-md>
-    <app-tools *ngIf="notes" [notesList]="notes.notes" [folder]="notes" (noteTitleId)="onClickScroll($event)">
+    <app-tools *ngIf="notes" [notesList]="notes.notes" [folder]="notes" (noteTitleId)="onClickScroll($event)"
+      (folderCHange)="noteAdded($event)">
     </app-tools>
 
   </div>

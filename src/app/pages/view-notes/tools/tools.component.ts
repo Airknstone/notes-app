@@ -4,8 +4,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { AddLinkDialogComponent } from '../../add-link-dialog/add-link-dialog.component';
 
 
-
-
 @Component({
   selector: 'app-tools',
   templateUrl: './tools.component.html',
@@ -20,6 +18,7 @@ export class ToolsComponent implements OnChanges {
   filteredNoteList = {} as INoteItems[];
 
   @Input() folder!: Notes;
+  @Output() folderCHange: EventEmitter<boolean> = new EventEmitter<boolean>();
   constructor (private dialog: MatDialog) {
   }
 
@@ -36,10 +35,15 @@ export class ToolsComponent implements OnChanges {
   openDialog() {
 
     const dialogRef = this.dialog.open(AddLinkDialogComponent, {
-      width: '80vw',
-      height: '95vh',
+      width: '100vw',
+      height: '100vh',
       disableClose: true,
       data: this.folder
+    });
+    dialogRef.afterClosed().subscribe(res => {
+      if (res !== false) {
+        this.folderCHange.emit(true);
+      }
     });
   }
   showEditorFunc() {
