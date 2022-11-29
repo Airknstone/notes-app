@@ -6,4 +6,5 @@ export interface DialogData {
   label2: string,
   confirmText: string,
   cancelText: string;
+  notes: string[];
 }

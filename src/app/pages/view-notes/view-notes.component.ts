@@ -17,7 +17,7 @@ export class ViewNotesComponent implements OnInit {
   constructor (private route: ActivatedRoute, private notesService: NotesService, private dialog: MatDialog) {
     this.noteId = this.route.snapshot.paramMap.get('noteId') as string;
 
-    this.notesService.findCategoryById(this.noteId).subscribe({
+    this.notesService.findFolderById(this.noteId).subscribe({
       next: (res) => {
         this.notes = res.data;
         console.log(this.notes);
@@ -30,7 +30,7 @@ export class ViewNotesComponent implements OnInit {
     console.log(data);
     this.notesService.addNote(this.noteId, data).subscribe({
       next: (res) => {
-        this.notesService.findCategoryById(this.noteId).subscribe({
+        this.notesService.findFolderById(this.noteId).subscribe({
           next: (res) => {
             this.notes = res.data;
             console.log(this.notes);
@@ -45,7 +45,7 @@ export class ViewNotesComponent implements OnInit {
     console.log(folderId, noteId);
     this.notesService.deleteNoteInsideFolder(folderId, noteId).subscribe({
       next: (res) => {
-        this.notesService.findCategoryById(this.noteId).subscribe({
+        this.notesService.findFolderById(this.noteId).subscribe({
           next: (res) => {
             this.notes = res.data;
             console.log(this.notes);

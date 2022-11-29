@@ -23,7 +23,7 @@ export class NotesService {
     return this.http.get<any>('/api/notes');
   }
 
-  findCategoryById(folderId: string): Observable<any> {
+  findFolderById(folderId: string): Observable<any> {
     return this.http.get<any>(`/api/notes/${folderId}`);
   }
   addFolder(note: Notes): Observable<any> {
@@ -38,9 +38,11 @@ export class NotesService {
       data);
   };
   updateFolder(folderId: any, data: any): Observable<any> {
+    console.log(data);
     return this.http.put<any>(`/api/notes/${folderId}`, {
       folderName: data.folderName,
       description: data.description,
+      notes: data.notes
     });
   }
   deleteNoteCategory(folderId: string): Observable<any> {

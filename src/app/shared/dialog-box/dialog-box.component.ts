@@ -13,12 +13,13 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: [ './dialog-box.component.scss' ]
 })
 export class DialogBoxComponent implements OnInit {
-
+  notes: string[] = [];
   addCategory = new FormGroup({
     title: new FormControl('', [ Validators.required ]),
     message: new FormControl('', [ Validators.required ])
   });
   constructor (@Inject(MAT_DIALOG_DATA) public data: DialogData, private _ngZone: NgZone, public dialogRef: MatDialogRef<DialogBoxComponent>) {
+    this.notes = data.notes;
     if (data) {
       this.addCategory.controls[ 'title' ].setValue(data.title),
         this.addCategory.controls[ 'message' ].setValue(data.message);
@@ -28,7 +29,7 @@ export class DialogBoxComponent implements OnInit {
     const newData = {
       folderName: this.addCategory.controls[ 'title' ].value,
       description: this.addCategory.controls[ 'message' ].value,
-
+      notes: this.notes
     };
     this.dialogRef.close(newData);
   }

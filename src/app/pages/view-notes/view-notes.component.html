@@ -1,11 +1,9 @@
 <div>
   <div class="note-card-container" *ngIf="notes" fxLayout="column" fxFlex="90">
 
-    {{notes._id}}
     <h1>{{notes.folderName}}</h1>
     <h3>{{notes.description}}</h3>
 
-    <br>
     <!--   <div [innerHTML]="htmlStr"></div> -->
     <div class="notes-wrapper">
       <div *ngIf="notes.notes">

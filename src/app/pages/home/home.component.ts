@@ -24,6 +24,7 @@ export class HomeComponent implements OnInit {
     message: '',
     confirmText: 'Save',
     cancelText: 'Cancel',
+    notes: []
   };
   constructor (private notesService: NotesService, private dialogService: ConfirmDialogService, private router: Router) {
     this.checked = [];
@@ -34,10 +35,7 @@ export class HomeComponent implements OnInit {
   }
   ngOnInit(): void {
   }
-  addTest() {
-    this.adding = !this.adding;
-    console.log(this.adding);
-  }
+
   editDialog(folderId: string) {
     let dialogEdit = {
       header: 'Add a new Category',
@@ -47,12 +45,14 @@ export class HomeComponent implements OnInit {
       message: '',
       confirmText: 'Save',
       cancelText: 'Cancel',
+      notes: []
     };
-    this.notesService.findCategoryById(folderId).subscribe({
+    this.notesService.findFolderById(folderId).subscribe({
       next: (res) => {
-        dialogEdit.header = "Editing Category";
+        dialogEdit.header = "Editing Folder";
         dialogEdit.title = res.data.folderName;
         dialogEdit.message = res.data.description;
+        dialogEdit.notes = res.data.notes;
 
         this.dialogService.confirmDialog(dialogEdit).subscribe(newNote => {
           console.log(newNote);
