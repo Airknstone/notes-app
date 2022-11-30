@@ -1,7 +1,7 @@
 import { Schema, model, Model } from 'mongoose';
 
 /* Definition interface */
-interface definition {
+export interface definition {
   word: string,
   wordtype: string,
   definition: string;

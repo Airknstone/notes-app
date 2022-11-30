@@ -10,6 +10,7 @@ const swaggerJsdoc = require('swagger-jsdoc');
 const chalk = require('chalk');
 const morgan = require('morgan');
 const NotesApi = require('./routes/notes_api');
+const DictionaryApi = require('./routes/dictionary_api');
 const errorHandler = require('./middleware/errorHandler');
 
 class Server {
@@ -70,6 +71,7 @@ class Server {
       swaggerUiExpress.setup(openapiSpecifications),
     );
     this.app.use('/api/notes', NotesApi);
+    this.app.use('/api/search', DictionaryApi);
     this.app.use(errorHandler);
 
 

@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import Notes, { INote, INoteItems } from '../models/notes-model';
 import { asyncHandler } from '../middleware/asyncHandler';
-const chalk = require('chalk');
+
 
 /* Gets all notes folder*/
 const getNotesFolder =
