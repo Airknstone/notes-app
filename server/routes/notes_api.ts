@@ -1,13 +1,6 @@
-
-
 import express from 'express';
 const router = express.Router();
-import Notes, { INote, INoteItems } from '../models/notes-model';
-
-import Category, { ICategory } from './../models/category.mode';
 const notesController = require('../controller/notes.controller');
-
-
 
 /**
  * findAll

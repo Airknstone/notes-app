@@ -42,18 +42,24 @@ var chalk = require('chalk');
 var dotenv = require('dotenv');
 dotenv.config({ path: './config.env' });
 var notes_model_1 = require("./server/models/notes-model");
+var dictionary_model_1 = require("./server/models/dictionary.model");
 var CONN = 'mongodb://127.0.0.1:27017/Notes_app';
 var note;
+var definition;
 mongoose
     .connect(CONN)
     .then(function () {
     console.log(chalk.bgBlue('Connection to database was successful'));
-    note = JSON.parse(fs.readFileSync("".concat(__dirname, "/server/_data/notes.json"), 'utf-8').toString());
     if (process.argv[2] === 'i') {
+        note = JSON.parse(fs.readFileSync("".concat(__dirname, "/server/_data/notes.json"), 'utf-8').toString());
         importData();
     }
-    else if (process.argv[2] === 'd') {
+    if (process.argv[2] === 'd') {
         deleteData();
+    }
+    else if (process.argv[2] === 'e') {
+        definition = JSON.parse(fs.readFileSync("".concat(__dirname, "/server/_data/csvjson.json"), 'utf-8').toString());
+        importDictionary();
     }
 })["catch"](function (err) {
     console.log(chalk.red("MongoDB Error: ".concat(err)));
@@ -101,6 +107,27 @@ var deleteData = function () { return __awaiter(void 0, void 0, void 0, function
         }
     });
 }); };
+/* Import Dictionary */
+var importDictionary = function () { return __awaiter(void 0, void 0, void 0, function () {
+    var err_3;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                return [4 /*yield*/, dictionary_model_1["default"].create(definition)];
+            case 1:
+                _a.sent();
+                console.log(chalk.bgMagentaBright('Data Imported...'));
+                process.exit();
+                return [3 /*break*/, 3];
+            case 2:
+                err_3 = _a.sent();
+                console.log(err_3);
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
+        }
+    });
+}); };
 /* seeds database with json document
 Use:
 node seeder.js i
@@ -109,6 +136,9 @@ node seeder.js d */
 if (process.argv[2] === 'i') {
     importData();
 }
-else if (process.argv[2] === 'd') {
+if (process.argv[2] === 'd') {
     deleteData();
+}
+else if (process.argv[2] === 'e') {
+    importDictionary();
 }

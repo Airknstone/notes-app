@@ -1,5 +1,5 @@
-import { Schema, model, Model, Types } from 'mongoose';
-/* subdocument */
+import { Schema, model, Model } from 'mongoose';
+
 /* Subdocument definition */
 export interface INoteItems {
   noteTitle: string,
