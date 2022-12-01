@@ -1,3 +1,4 @@
+import { definition } from './../../../../server/models/dictionary.model';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Notes } from 'src/app/shared/interfaces/notes.interface';
@@ -5,6 +6,7 @@ import { NotesService } from 'src/app/shared/services/notes-service/notes.servic
 import { DefinitionsService } from './../../shared/services/definitions-service/definitions.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Definitions } from './../../shared/interfaces/definitions.interface';
+import { skip } from 'rxjs';
 
 @Component({
   selector: 'app-view-notes',
@@ -39,8 +41,14 @@ export class ViewNotesComponent implements OnInit {
     const text = window.getSelection()?.toString();
     this.definitionService.getMatchingTerms(text!).subscribe({
       next: (res) => {
-        this._snackBar.open(this.formatSnackBarResponse(res.data), 'close', {
-          panelClass: [ 'green-snackbar', 'login-snackbar' ]
+        let snack = this._snackBar.open(/* this.formatSnackBarResponse(res.data) */ 'Loading...', 'close', {
+          panelClass: [ 'white-snackbar' ],
+          verticalPosition: 'top',
+          horizontalPosition: 'center'
+        });
+        snack.afterOpened().subscribe(() => {
+          let responseTemplate = this.formatSnackBarResponse(res.data);
+          document.getElementsByClassName("mat-simple-snack-bar-content")[ 0 ].innerHTML = responseTemplate;
         });
       }
     });
@@ -48,7 +56,13 @@ export class ViewNotesComponent implements OnInit {
 
   formatSnackBarResponse(dataArr: Array<Definitions>) {
     if (dataArr.length > 0) {
-      return JSON.stringify(dataArr);
+      let data: string = '';
+      dataArr.forEach((definition, index) => {
+        console.log(definition);
+        data += `<p><b>${definition.word}</b> - <i>${definition.wordtype}</i></p>
+        <p>${definition.definition}</p>`;
+      });
+      return data;
     }
     else {
       return 'No Results Found.';

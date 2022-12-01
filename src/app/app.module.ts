@@ -36,6 +36,7 @@ import { RichtexteditorComponent } from './shared/richtexteditor/richtexteditor.
 import { ToolsComponent } from './pages/view-notes/tools/tools.component';
 import { EditNotesComponent } from './pages/view-notes/edit-notes/edit-notes.component';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatTreeModule } from '@angular/material/tree';
 
 
 @NgModule({
@@ -73,7 +74,8 @@ import { MatChipsModule } from '@angular/material/chips';
     TextFieldModule,
     QuillModule,
     MatChipsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatTreeModule
   ],
   providers: [],
   bootstrap: [ AppComponent ]
