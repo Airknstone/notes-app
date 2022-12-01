@@ -10,9 +10,11 @@ const getMatchingDefinitions = asyncHandler(async (req: Request, res: Response, 
 
   Definition.find({ word: wordCapitalzed }, (err: unknown, words: definition) => {
     if (err) {
-      /*         return next(new ErrorResponse('Could not find Notes', 404)); */
       return next(err);
-    } else {
+    } else if (!words) {
+      return next(err);
+    }
+    else {
       console.log(words);
       res.json({
         httpCode: 200,

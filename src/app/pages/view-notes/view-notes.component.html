@@ -36,7 +36,8 @@
                 <p class="tags" *ngFor="let tag of note.tags">{{tag}} </p>
               </div>
             </div>
-            <div [innerHTML]="note.noteBody"></div>
+            <div [innerHTML]="note.noteBody" (dblclick)="selectText($event)"></div>
+
           </div>
         </div>
       </div>

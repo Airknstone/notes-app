@@ -48,3 +48,11 @@ body {
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
+.green-snackbar {
+  background-color: rgb(236, 236, 236);
+  color: rgb(49, 49, 49);
+  padding: 2rem;
+  .mat-simple-snack-bar-content {
+    font-size: 16px;
+  }
+}

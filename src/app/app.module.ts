@@ -23,7 +23,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ViewNotesComponent } from './pages/view-notes/view-notes.component';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
@@ -38,20 +38,16 @@ import { EditNotesComponent } from './pages/view-notes/edit-notes/edit-notes.com
 import { MatChipsModule } from '@angular/material/chips';
 
 
-
-
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-
     ViewNotesComponent,
     DialogBoxComponent,
     AddLinkDialogComponent,
     RichtexteditorComponent,
     ToolsComponent,
     EditNotesComponent,
-
   ],
   imports: [
     BrowserModule,
@@ -76,7 +72,8 @@ import { MatChipsModule } from '@angular/material/chips';
     MatListModule,
     TextFieldModule,
     QuillModule,
-    MatChipsModule
+    MatChipsModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [ AppComponent ]
