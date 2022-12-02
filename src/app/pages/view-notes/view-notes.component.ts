@@ -6,7 +6,7 @@ import { NotesService } from 'src/app/shared/services/notes-service/notes.servic
 import { DefinitionsService } from './../../shared/services/definitions-service/definitions.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Definitions } from './../../shared/interfaces/definitions.interface';
-import { skip } from 'rxjs';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-view-notes',
@@ -88,6 +88,11 @@ export class ViewNotesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  drop(event: CdkDragDrop<string[]>) {
+    console.log('sorted');
+    moveItemInArray(this.notes.notes, event.previousIndex, event.currentIndex);
   }
 
 }

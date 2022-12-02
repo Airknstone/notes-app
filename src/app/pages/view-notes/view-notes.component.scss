@@ -1,6 +1,5 @@
 .note-card-container {
   padding: 1rem;
-
   button {
     width: 20rem;
     margin-bottom: 20px;
@@ -11,26 +10,36 @@
   width: 20rem;
 }
 .tags {
-  margin: 0 20px 0;
-  font-size: 14px;
-  background-color: rgb(0, 140, 255);
+  margin: 0 10px 0;
+  font-size: 12px;
+  background-color: rgb(0, 101, 160);
   color: white;
-  padding: 2px 20px;
-  display: inline-block;
+  padding: 5px 12px;
   border-radius: 5px;
 }
+.tags-container {
+  font-size: 12px;
+
+  margin-left: auto !important;
+  display: flex;
+  justify-content: space-between;
+  b {
+    padding: 5px 0;
+  }
+}
 .note-title-container {
+  width: 100%;
   h1 {
     border-bottom: 1px solid rgb(223, 223, 223);
-
-    font-size: 2rem;
+    font-size: 1.7rem;
     font-weight: 900;
-    padding: 0rem 0rem 1rem 0;
+    padding-bottom: 0.5rem;
+    min-width: 10rem;
   }
 }
 .notes-wrapper {
   /*   font-family: Georgia, 'Times New Roman', Times, serif; */
-  margin-top: 40px;
+  margin: 40px 0;
 
   > * {
     font-size: 15px;
@@ -56,4 +65,26 @@
 .note-container {
   margin-bottom: 3rem;
   overflow: auto;
+}
+.accordion-container {
+  margin: 2rem 0;
+}
+.notes {
+  padding-left: 2rem;
+  margin-bottom: 5rem;
+}
+.clickable {
+  cursor: pointer;
+}
+.showNotes {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.example-custom-placeholder {
+  background: #ccc;
+  border: dotted 3px #999;
+  min-height: 180px;
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }

@@ -4,45 +4,62 @@
     <h1>{{notes.folderName}}</h1>
     <h3>{{notes.description}}</h3>
     <!--   <div [innerHTML]="htmlStr"></div> -->
-    <div class="notes-wrapper">
-      <div *ngIf="notes.notes">
-        <div class="note-container" *ngFor="let note of notes.notes" fxLayout="row" fxLayoutAlign="start start">
-          <div class="menu">
-            <div>
-              <span mat-icon-button [matMenuTriggerFor]="menu">
-                <mat-icon>more_vert</mat-icon>
-              </span>
-              <mat-menu #menu="matMenu">
-                <button mat-menu-item>
-                  <mat-icon>dialpad</mat-icon>
-                  <span>Edit</span>
-                </button>
-                <button mat-menu-item (click)="deleteNote(notes._id, note._id)">
-                  <mat-icon>delete_sweep</mat-icon>
-                  <span>Delete</span>
-                </button>
-              </mat-menu>
-            </div>
-            <br>
-            <mat-icon class="move">view_array</mat-icon>
-          </div>
-          <div class="noteBody">
-            <div class="note-title-container">
-              <h1 id="{{note._id}}" *ngIf="null !== note.noteTitle">{{note.noteTitle }}</h1>
-              <div *ngIf="note.tags" fxLayout="row" fxLayoutAlign="start center">
-                <mat-icon>arrow_right</mat-icon><b>Tags: </b>
-                <span>
-                </span> &nbsp;
-                <p class="tags" *ngFor="let tag of note.tags">{{tag}} </p>
+
+    <div class="notes-wrapper" cdkDropList (cdkDropListDropped)="drop($event)">
+      <cdk-accordion>
+        <cdk-accordion-item *ngFor="let note of notes.notes; let index = index;" #accordionItem="cdkAccordionItem"
+          role="button" tabindex="0" [attr.id]="'accordion-header-' + index"
+          [attr.aria-expanded]="accordionItem.expanded" [attr.aria-controls]="'accordion-body-' + index">
+
+          <div cdkDrag>
+            <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
+            <div fxLayout="row" fxLayoutAlign=" start start">
+              <div class="menu" fxLayout="column" fxLayoutAlign=" start start">
+                <span mat-icon-button [matMenuTriggerFor]="menu">
+                  <mat-icon>more_vert</mat-icon>
+                </span>
+                <mat-menu #menu="matMenu">
+                  <button mat-menu-item>
+                    <mat-icon>dialpad</mat-icon>
+                    <span>Edit</span>
+                  </button>
+                  <button mat-menu-item (click)="deleteNote(notes._id, note._id)">
+                    <mat-icon>delete_sweep</mat-icon>
+                    <span>Delete</span>
+                  </button>
+                </mat-menu>
+
+                <mat-icon class=" move">view_array</mat-icon>
+
+              </div>
+              <div class="note-title-container" fxLayoutAlign="none start">
+                <h1 class="clickable" (click)="accordionItem.toggle()" id="{{note._id}}"
+                  *ngIf="null !== note.noteTitle">
+                  {{note.noteTitle }}
+                </h1>
+                <div class="clickable" (click)="accordionItem.toggle()">
+                  Click to {{ accordionItem.expanded ? 'close' : 'open' }}</div>
+                <div *ngIf="note.tags" class="tags-container">
+                  <b>Tags: </b>
+                  <p class="tags" *ngFor="let tag of note.tags">{{tag}} </p>
+                </div>
               </div>
             </div>
-            <div [innerHTML]="note.noteBody" (dblclick)="selectText($event)"></div>
 
+            <!-- Click -->
+            <div class="notes">
+
+              <div *ngIf="!accordionItem.expanded" class="showNotes" [innerHTML]="note.noteBody"></div>
+
+              <div role="region" [style.display]="accordionItem.expanded ? '' : 'none'"
+                [attr.id]="'accordion-body-' + index" [attr.aria-labelledby]="'accordion-header-' + index">
+                <div [innerHTML]="note.noteBody" (dblclick)="selectText($event)"></div>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
+        </cdk-accordion-item>
+      </cdk-accordion>
     </div>
-
   </div>
 
   <div class="tools" fxFlex="10" fxHide fxShow.gt-md>

@@ -37,6 +37,8 @@ import { ToolsComponent } from './pages/view-notes/tools/tools.component';
 import { EditNotesComponent } from './pages/view-notes/edit-notes/edit-notes.component';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatTreeModule } from '@angular/material/tree';
+import { CdkAccordionModule } from '@angular/cdk/accordion';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 
 @NgModule({
@@ -75,7 +77,9 @@ import { MatTreeModule } from '@angular/material/tree';
     QuillModule,
     MatChipsModule,
     MatSnackBarModule,
-    MatTreeModule
+    MatTreeModule,
+    CdkAccordionModule,
+    DragDropModule
   ],
   providers: [],
   bootstrap: [ AppComponent ]
