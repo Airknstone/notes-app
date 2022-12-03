@@ -17,7 +17,7 @@
           <mat-checkbox #{{note._id}} (change)="changeEvent($event, note._id)">Select</mat-checkbox>
 
           <mat-chip-list aria-label="notes-info">
-            <mat-chip class="chips">Notes: {{note.notes.length}}</mat-chip>
+            <mat-chip routerLink="/view-notes/{{note._id}}" class="chips">Notes: {{note.notes.length}}</mat-chip>
             <!--             <mat-chip>Two fish</mat-chip>
             <mat-chip color="primary" selected>Primary fish</mat-chip>
             <mat-chip color="accent" selected>Accent fish</mat-chip> -->

@@ -1,3 +1,4 @@
+import { EditNotesComponent } from './pages/view-notes/edit-notes/edit-notes.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
@@ -11,7 +12,16 @@ const routes: Routes = [
   },
   {
     path: 'view-notes/:noteId',
-    component: ViewNotesComponent, pathMatch: 'full'
+    component: ViewNotesComponent,
+  },
+  {
+    path: 'view-notes/:noteId/:editnote',
+    component: EditNotesComponent, pathMatch: 'full'
+  },
+  {
+    path: '**',
+    redirectTo: '',
+
   }
 
 

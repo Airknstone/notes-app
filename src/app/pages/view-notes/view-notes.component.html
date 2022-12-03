@@ -1,17 +1,17 @@
 <div>
+
   <div class="note-card-container" *ngIf="notes" fxLayout="column" fxFlex="90">
-
-    <h1>{{notes.folderName}}</h1>
-    <h3>{{notes.description}}</h3>
-    <!--   <div [innerHTML]="htmlStr"></div> -->
-
+    <div class="header">
+      <h1>{{notes.folderName}}</h1>
+      <h3>{{notes.description}}</h3>
+    </div>
     <div class="notes-wrapper" cdkDropList (cdkDropListDropped)="drop($event)">
       <cdk-accordion>
         <cdk-accordion-item *ngFor="let note of notes.notes; let index = index;" #accordionItem="cdkAccordionItem"
           role="button" tabindex="0" [attr.id]="'accordion-header-' + index"
           [attr.aria-expanded]="accordionItem.expanded" [attr.aria-controls]="'accordion-body-' + index">
 
-          <div cdkDrag>
+          <div cdkDrag [ngClass]="{card: !accordionItem.expanded, expanded: accordionItem.expanded}">
             <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
             <div fxLayout="row" fxLayoutAlign=" start start">
               <div class="menu" fxLayout="column" fxLayoutAlign=" start start">
@@ -19,7 +19,7 @@
                   <mat-icon>more_vert</mat-icon>
                 </span>
                 <mat-menu #menu="matMenu">
-                  <button mat-menu-item>
+                  <button mat-menu-item [routerLink]="[note._id]" [state]="note">
                     <mat-icon>dialpad</mat-icon>
                     <span>Edit</span>
                   </button>
@@ -28,9 +28,6 @@
                     <span>Delete</span>
                   </button>
                 </mat-menu>
-
-                <mat-icon class=" move">view_array</mat-icon>
-
               </div>
               <div class="note-title-container" fxLayoutAlign="none start">
                 <h1 class="clickable" (click)="accordionItem.toggle()" id="{{note._id}}"
@@ -47,15 +44,13 @@
             </div>
 
             <!-- Click -->
-            <div class="notes">
-
-              <div *ngIf="!accordionItem.expanded" class="showNotes" [innerHTML]="note.noteBody"></div>
-
-              <div role="region" [style.display]="accordionItem.expanded ? '' : 'none'"
-                [attr.id]="'accordion-body-' + index" [attr.aria-labelledby]="'accordion-header-' + index">
-                <div [innerHTML]="note.noteBody" (dblclick)="selectText($event)"></div>
-              </div>
+            <div *ngIf="!accordionItem.expanded" class="notes">
+              <div class="showNotes" [innerHTML]="note.noteBody"></div>
             </div>
+          </div>
+          <div class="note" role="region" [style.display]="accordionItem.expanded ? '' : 'none'"
+            [attr.id]="'accordion-body-' + index" [attr.aria-labelledby]="'accordion-header-' + index">
+            <div [innerHTML]="note.noteBody" (dblclick)="selectText($event)"></div>
           </div>
         </cdk-accordion-item>
       </cdk-accordion>

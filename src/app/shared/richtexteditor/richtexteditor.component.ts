@@ -6,9 +6,6 @@ import { Output, EventEmitter } from '@angular/core';
 interface Tag {
   tag: string;
 }
-
-
-
 @Component({
   selector: 'app-richtexteditor',
   templateUrl: './richtexteditor.component.html',
@@ -17,16 +14,13 @@ interface Tag {
 export class RichtexteditorComponent implements OnInit {
   editorStyle = {
     'min-height': '380px',
-    'border': 'none',
-    'padding': '0rem 5rem'
+    'border': 'none'
   };
 
   config = {
-
     toolbar: [
       [ 'bold', 'italic', 'underline', 'strike' ],        // toggled buttons
       [ 'blockquote', 'code-block' ],
-
       [ { 'header': 1 }, { 'header': 2 } ],               // custom button values
       [ { 'list': 'ordered' }, { 'list': 'bullet' } ],
       [ { 'script': 'sub' }, { 'script': 'super' } ],      // superscript/subscript
@@ -34,11 +28,9 @@ export class RichtexteditorComponent implements OnInit {
       [ 'direction', { 'align': [] } ],
       [ 'link', 'image', 'video', 'formula' ],                      // text direction
       [ { 'header': [ 1, 2, 3, 4, 5, 6, false ] } ],
-
       [ { 'color': [] }, { 'background': [] } ],          // dropdown with defaults from theme
       [ { 'font': [] } ],
       [ { 'align': [] } ],
-
       [ 'clean' ]                                         // remove formatting button
     ]
   };
@@ -49,7 +41,7 @@ export class RichtexteditorComponent implements OnInit {
     tag: new FormControl('')
   });
   completeNote: Object = {};
-
+  incomingNote = {};
 
   tag: Tag[] = [
     { tag: 'Typescript' },
@@ -60,7 +52,6 @@ export class RichtexteditorComponent implements OnInit {
   constructor () { }
 
   ngOnInit(): void {
-
   }
   changedEditor(event: EditorChangeContent | EditorChangeSelection) {
     // tslint:disable-next-line:no-console
@@ -75,7 +66,6 @@ export class RichtexteditorComponent implements OnInit {
     };
     console.log(this.completeNote);
     this.note.emit(this.completeNote);
-
     this.noteSection.controls[ 'title' ].setValue('');
     this.noteSection.controls[ 'control' ].setValue('');
     this.noteSection.controls[ 'tag' ].setValue('');

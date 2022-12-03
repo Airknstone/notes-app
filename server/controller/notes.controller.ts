@@ -174,6 +174,8 @@ const addNewNote = asyncHandler(async (req: Request, res: Response, next: NextFu
   });
 });
 
+
+
 /* Updates a note Within a Folder */
 const updatesANoteWithinFolder = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
   Notes.findOne({ _id: req.params[ 'folderId' ] }, function (err: any, note: any) {

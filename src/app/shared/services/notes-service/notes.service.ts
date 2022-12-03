@@ -32,12 +32,12 @@ export class NotesService {
       description: note.description,
     });
   }
-  addNote(folderId: any, data: any): Observable<any> {
+  addNote(folderId: string, data: any): Observable<any> {
     console.log(folderId, data);
     return this.http.post(`/api/notes/${folderId}/note`,
       data);
   };
-  updateFolder(folderId: any, data: any): Observable<any> {
+  updateFolder(folderId: string, data: any): Observable<any> {
     console.log(data);
     return this.http.put<any>(`/api/notes/${folderId}`, {
       folderName: data.folderName,
@@ -45,6 +45,11 @@ export class NotesService {
       notes: data.notes
     });
   }
+
+  updateNote(folderId: string, noteId: string, data: any): Observable<any> {
+    return this.http.put<any>(`/api/notes/${folderId}/${noteId}`, data);
+  }
+
   deleteNoteCategory(folderId: string): Observable<any> {
     return this.http.delete<any>(`/api/notes/${folderId}`);
   }

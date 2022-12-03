@@ -1,5 +1,4 @@
-import { definition } from './../../../../server/models/dictionary.model';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Notes } from 'src/app/shared/interfaces/notes.interface';
 import { NotesService } from 'src/app/shared/services/notes-service/notes.service';
@@ -16,7 +15,6 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 export class ViewNotesComponent implements OnInit {
   foldersId: string;
   notes!: Notes;
-
   constructor
     (private route: ActivatedRoute,
       private notesService: NotesService,
@@ -31,7 +29,6 @@ export class ViewNotesComponent implements OnInit {
     this.notesService.findFolderById(this.foldersId).subscribe({
       next: (res) => {
         this.notes = res.data;
-        console.log(this.notes);
       }
     });
   }
@@ -41,7 +38,7 @@ export class ViewNotesComponent implements OnInit {
     const text = window.getSelection()?.toString();
     this.definitionService.getMatchingTerms(text!).subscribe({
       next: (res) => {
-        let snack = this._snackBar.open(/* this.formatSnackBarResponse(res.data) */ 'Loading...', 'close', {
+        let snack = this._snackBar.open('Loading...', 'close', {
           panelClass: [ 'white-snackbar' ],
           verticalPosition: 'top',
           horizontalPosition: 'center'
@@ -91,8 +88,13 @@ export class ViewNotesComponent implements OnInit {
   }
 
   drop(event: CdkDragDrop<string[]>) {
-    console.log('sorted');
     moveItemInArray(this.notes.notes, event.previousIndex, event.currentIndex);
+    this.notesService.updateFolder(this.foldersId, this.notes).subscribe({
+      next: (res) => {
+        /* Temporary solution to re render notes titles in tools section. comment out and reorder notes */
+        this.getFolderById();
+      }
+    });
   }
 
 }

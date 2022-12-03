@@ -25,6 +25,9 @@ export class ToolsComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
     //Add '${implements OnChanges}' to the class.
+
+    console.log("Changes", changes);
+
     this.filteredNoteList = this.notesList.filter(item => {
       return item.noteTitle;
     });

@@ -4,6 +4,12 @@
     width: 20rem;
     margin-bottom: 20px;
   }
+  .header {
+    h1 {
+      font-size: 2rem;
+      font-weight: 500;
+    }
+  }
 }
 
 .note-card {
@@ -30,11 +36,10 @@
 .note-title-container {
   width: 100%;
   h1 {
-    border-bottom: 1px solid rgb(223, 223, 223);
-    font-size: 1.7rem;
-    font-weight: 900;
+    font-size: 1.5rem;
+    font-weight: 600;
     padding-bottom: 0.5rem;
-    min-width: 10rem;
+    margin-right: 20px;
   }
 }
 .notes-wrapper {
@@ -71,14 +76,17 @@
 }
 .notes {
   padding-left: 2rem;
-  margin-bottom: 5rem;
+}
+.note {
+  padding-left: 2rem;
+  margin-top: -2rem;
 }
 .clickable {
   cursor: pointer;
 }
 .showNotes {
   display: -webkit-box;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -87,4 +95,17 @@
   border: dotted 3px #999;
   min-height: 180px;
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+.card {
+  background-color: rgba(253, 253, 253, 0.815);
+  box-shadow: 1px 1px 5px #bebebe;
+  margin: 1rem 0;
+  padding: 1rem 0;
+  border-radius: 10px;
+}
+.expanded {
+  background-color: rgba(253, 253, 253, 0.815);
+
+  margin: 1rem 0;
+  padding: 1rem 0;
 }
