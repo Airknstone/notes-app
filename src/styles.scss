@@ -61,3 +61,24 @@ body {
     color: rgb(0, 128, 90);
   }
 }
+.content-editor {
+  position: relative !important;
+
+  .ql-toolbar.ql-snow {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 1 !important;
+    background-color: white;
+    align-self: flex-start;
+    border: none;
+  }
+  .ql-clipboard {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+  }
+}

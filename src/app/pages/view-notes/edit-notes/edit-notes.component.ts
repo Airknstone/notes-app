@@ -13,7 +13,8 @@ import { Router } from '@angular/router';
 export class EditNotesComponent implements OnInit {
   editorStyle = {
     'min-height': '380px',
-    'border': 'none'
+    'border': 'none',
+    'background-color': 'white',
   };
 
   config = {
@@ -73,5 +74,9 @@ export class EditNotesComponent implements OnInit {
     });
 
     console.log(updatedNote);
+  }
+
+  cancel() {
+    this.router.navigate([ `view-notes/${this.folderId}` ]);
   }
 }

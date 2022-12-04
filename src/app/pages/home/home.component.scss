@@ -1,7 +1,6 @@
 .example-card {
-  margin-bottom: 35px;
-  height: 195px;
-  text-overflow: ellipsis;
+  margin-bottom: 25px;
+  height: 155px;
   overflow: hidden;
 }
 .note-card-container {
@@ -17,12 +16,39 @@
   color: rgb(86, 172, 201);
   text-decoration: underline;
 }
+.top-section {
+  width: 84%;
+}
 .heading {
   padding: 0 1rem;
+  font-weight: 500;
+  font-size: 2rem;
+
   button {
     margin-right: 10px;
   }
 }
 .chips {
   font-size: 12px;
+  background-color: #006a74;
+  color: rgb(234, 234, 234);
+}
+.line-clamp {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+#delete-row {
+  background-color: rgb(160, 2, 2);
+}
+
+.action-buttons {
+  button {
+    background-color: #2d4244;
+    color: rgb(234, 234, 234);
+    &:hover {
+      background-color: rgb(70, 106, 145);
+    }
+  }
 }

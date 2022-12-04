@@ -11,34 +11,40 @@
           role="button" tabindex="0" [attr.id]="'accordion-header-' + index"
           [attr.aria-expanded]="accordionItem.expanded" [attr.aria-controls]="'accordion-body-' + index">
 
-          <div cdkDrag [ngClass]="{card: !accordionItem.expanded, expanded: accordionItem.expanded}">
+          <div class="card-container" cdkDrag
+            [ngClass]="{card: !accordionItem.expanded, expanded: accordionItem.expanded}">
             <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
             <div fxLayout="row" fxLayoutAlign=" start start">
-              <div class="menu" fxLayout="column" fxLayoutAlign=" start start">
-                <span mat-icon-button [matMenuTriggerFor]="menu">
-                  <mat-icon>more_vert</mat-icon>
-                </span>
-                <mat-menu #menu="matMenu">
-                  <button mat-menu-item [routerLink]="[note._id]" [state]="note">
-                    <mat-icon>dialpad</mat-icon>
-                    <span>Edit</span>
-                  </button>
-                  <button mat-menu-item (click)="deleteNote(notes._id, note._id)">
-                    <mat-icon>delete_sweep</mat-icon>
-                    <span>Delete</span>
-                  </button>
-                </mat-menu>
-              </div>
-              <div class="note-title-container" fxLayoutAlign="none start">
-                <h1 class="clickable" (click)="accordionItem.toggle()" id="{{note._id}}"
-                  *ngIf="null !== note.noteTitle">
-                  {{note.noteTitle }}
-                </h1>
-                <div class="clickable" (click)="accordionItem.toggle()">
-                  Click to {{ accordionItem.expanded ? 'close' : 'open' }}</div>
-                <div *ngIf="note.tags" class="tags-container">
-                  <b>Tags: </b>
-                  <p class="tags" *ngFor="let tag of note.tags">{{tag}} </p>
+              <mat-icon class="menu">drag_indicator</mat-icon>
+              <div class="note-title-container" fxLayout="row" fxLayoutAlign="space-between start">
+                <div fxLayout="row" fxLayoutAlign="none start">
+                  <h1 class="clickable" (click)="accordionItem.toggle()" id="{{note._id}}"
+                    *ngIf="null !== note.noteTitle">
+                    {{note.noteTitle }}
+                  </h1>
+                  <div *ngIf="note.tags" class="tags-container">
+                    <b>Tags: </b>
+                    <p class="tags" *ngFor="let tag of note.tags">{{tag}} </p>
+                  </div>
+                </div>
+
+
+                <div fxLayout="row">
+                  <div class="clickable" (click)="accordionItem.toggle()">
+                    Click to {{ accordionItem.expanded ? 'close' : 'open' }}</div>
+                  <span mat-icon-button [matMenuTriggerFor]="menu">
+                    <mat-icon>more_vert</mat-icon>
+                  </span>
+                  <mat-menu #menu="matMenu">
+                    <button mat-menu-item [routerLink]="[note._id]" [state]="note">
+                      <mat-icon>dialpad</mat-icon>
+                      <span>Edit</span>
+                    </button>
+                    <button mat-menu-item (click)="deleteNote(notes._id, note._id)">
+                      <mat-icon>delete_sweep</mat-icon>
+                      <span>Delete</span>
+                    </button>
+                  </mat-menu>
                 </div>
               </div>
             </div>

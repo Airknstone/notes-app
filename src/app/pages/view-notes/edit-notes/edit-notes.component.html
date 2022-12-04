@@ -1,29 +1,31 @@
 <div class="container">
-  Editing Note
-</div>
-<form [formGroup]="noteSection">
-  <div class="tool-bar" fxLayout="row" fxLayoutAlign="space-evenly stretch">
-    <mat-form-field appearance="legacy" class="input-text">
-      <mat-label>Title: </mat-label>
-      <input matInput type="text" formControlName="title" maxlength="80">
-    </mat-form-field> &nbsp;
-    <mat-form-field appearance="legacy" class="input-tags">
-      <mat-label>Tag: </mat-label>
-      <mat-select formControlName="tag" name="tag">
-        <mat-option *ngFor="let tag of noteData.tags" [value]="tag">
-          {{tag}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <div>
-      <button mat-raised-button color="primary">create tag</button>
-      &nbsp;
-      <button mat-raised-button color="primary" [disabled]="!noteSection.valid" (click)="save()">Save</button>
+  <h2>Editing Note</h2>
+
+  <form [formGroup]="noteSection">
+    <div class="tool-bar" fxLayout="row" fxLayoutAlign="space-evenly stretch">
+      <mat-form-field appearance="legacy" class="input-text">
+        <mat-label>Title: </mat-label>
+        <input matInput type="text" formControlName="title" maxlength="80">
+      </mat-form-field> &nbsp;
+      <mat-form-field appearance="legacy" class="input-tags">
+        <mat-label>Tag: </mat-label>
+        <mat-select formControlName="tag" name="tag">
+          <mat-option *ngFor="let tag of noteData.tags" [value]="tag">
+            {{tag}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div>
+        <button mat-raised-button color="primary">create tag</button>
+        &nbsp;
+        <button mat-raised-button color="primary" [disabled]="!noteSection.valid" (click)="save()">Save</button>
+        <button mat-raised-button color="primary" [disabled]="!noteSection.valid" (click)="cancel()">Cancel</button>
+      </div>
     </div>
-  </div>
 
 
-  <quill-editor formControlName="control" class="content-editor" [styles]="editorStyle" [modules]="config">
-  </quill-editor>
+    <quill-editor formControlName="control" class="content-editor" [styles]="editorStyle" [modules]="config">
+    </quill-editor>
 
-</form>
+  </form>
+</div>

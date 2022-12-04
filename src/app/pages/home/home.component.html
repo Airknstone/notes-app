@@ -1,30 +1,35 @@
-<div fxFlex fxLayoutGap="40px">
+<div>
 
-  <div class="heading" fxLayoutAlign="end start">
-    <button *ngIf="checked.length > 0" mat-raised-button color="warn" (click)="deleteGroup()">Delete Group</button>
-    <button mat-raised-button color="primary" (click)="openDialog()">Add new Folder</button>
-    <input type="file" onchange="console.log(event.target.files)">
+  <div fxLayout="row" fxLayoutAlign="space-between start" class="top-section">
+    <h1 class="heading">Notes Directory</h1>
 
+    <div class="action-buttons">
+      <button id="delete-row" mat-button color="warn" *ngIf="checked.length > 0" (click)="deleteGroup()">Delete
+        Group</button>&nbsp;
+      <button mat-icon-button (click)="openDialog()">
+        +
+      </button>
+      <!--       <input type="file" onchange="console.log(event.target.files)"> -->
+    </div>
+  </div>
 
-  </div> <br>
-
-
-  <h1 class="heading">Welcome</h1>
   <div *ngIf="notes">
     <div class="note-card-container" fxLayout="row wrap" fxLayoutGap="50px">
-      <mat-card *ngFor="let note of notes" class="example-card" id="{{note._id}}" fxFlex="45">
+      <mat-card *ngFor="let note of notes" class="example-card" id="{{note._id}}" fxFlex="85">
         <div fxLayout="row " fxLayoutAlign="space-between center">
           <mat-checkbox #{{note._id}} (change)="changeEvent($event, note._id)">Select</mat-checkbox>
 
-          <mat-chip-list aria-label="notes-info">
-            <mat-chip routerLink="/view-notes/{{note._id}}" class="chips">Notes: {{note.notes.length}}</mat-chip>
-            <!--             <mat-chip>Two fish</mat-chip>
+          <div fxLayout="row ">
+            <mat-chip-list aria-label="notes-info">
+              <mat-chip routerLink="/view-notes/{{note._id}}" class="chips">Notes: {{note.notes.length}}</mat-chip>
+              <!--             <mat-chip>Two fish</mat-chip>
             <mat-chip color="primary" selected>Primary fish</mat-chip>
             <mat-chip color="accent" selected>Accent fish</mat-chip> -->
-          </mat-chip-list>
-          <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Category Card Options">
-            <mat-icon>more_vert</mat-icon>
-          </button>
+            </mat-chip-list>
+            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Category Card Options">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+          </div>
         </div>
 
         <mat-menu #menu="matMenu">
