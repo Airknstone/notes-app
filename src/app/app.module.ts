@@ -9,6 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 /* QUill */
 import { QuillModule } from 'ngx-quill';
 
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './pages/home/home.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -39,6 +40,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatTreeModule } from '@angular/material/tree';
 import { CdkAccordionModule } from '@angular/cdk/accordion';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 @NgModule({
@@ -79,7 +81,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     MatSnackBarModule,
     MatTreeModule,
     CdkAccordionModule,
-    DragDropModule
+    DragDropModule,
+    MatTooltipModule
   ],
   providers: [],
   bootstrap: [ AppComponent ]

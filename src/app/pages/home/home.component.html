@@ -6,8 +6,8 @@
     <div class="action-buttons">
       <button id="delete-row" mat-button color="warn" *ngIf="checked.length > 0" (click)="deleteGroup()">Delete
         Group</button>&nbsp;
-      <button mat-icon-button (click)="openDialog()">
-        +
+      <button mat-icon-button (click)="openDialog()" matTooltip="Add Folder" matTooltipPosition="left">
+        <mat-icon>library_add</mat-icon>
       </button>
       <!--       <input type="file" onchange="console.log(event.target.files)"> -->
     </div>

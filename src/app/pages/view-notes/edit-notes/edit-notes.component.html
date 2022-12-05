@@ -1,8 +1,9 @@
 <div class="container">
-  <h2>Editing Note</h2>
+
 
   <form [formGroup]="noteSection">
     <div class="tool-bar" fxLayout="row" fxLayoutAlign="space-evenly stretch">
+      <h2>Editing Note</h2>
       <mat-form-field appearance="legacy" class="input-text">
         <mat-label>Title: </mat-label>
         <input matInput type="text" formControlName="title" maxlength="80">

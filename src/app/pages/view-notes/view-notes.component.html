@@ -32,7 +32,7 @@
                 <div fxLayout="row">
                   <div class="clickable" (click)="accordionItem.toggle()">
                     Click to {{ accordionItem.expanded ? 'close' : 'open' }}</div>
-                  <span mat-icon-button [matMenuTriggerFor]="menu">
+                  <span class="clickable" mat-icon-button [matMenuTriggerFor]="menu">
                     <mat-icon>more_vert</mat-icon>
                   </span>
                   <mat-menu #menu="matMenu">
@@ -56,6 +56,7 @@
           </div>
           <div class="note" role="region" [style.display]="accordionItem.expanded ? '' : 'none'"
             [attr.id]="'accordion-body-' + index" [attr.aria-labelledby]="'accordion-header-' + index">
+
             <div [innerHTML]="note.noteBody" (dblclick)="selectText($event)"></div>
           </div>
         </cdk-accordion-item>

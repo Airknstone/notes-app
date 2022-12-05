@@ -15,6 +15,7 @@ export class EditNotesComponent implements OnInit {
     'min-height': '380px',
     'border': 'none',
     'background-color': 'white',
+
   };
 
   config = {
